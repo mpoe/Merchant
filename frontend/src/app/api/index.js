@@ -35,18 +35,6 @@ export function getRooms() {
 }
 
 socket.on('GOT_ROOMS', (list) => {
-	// store.dispatch(setRoomList(list));
-});
-
-export function joinRoom(roomId) {
-	socket.emit('JOIN_ROOM', roomId);
-}
-
-export function getRooms() {
-	socket.emit('GET_ROOMS');
-}
-
-socket.on('GOT_ROOMS', (list) => {
 	store.dispatch(setRoomList(list));
 });
 
