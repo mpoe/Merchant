@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes as Switch } from 'react-router-dom';
 
 import NamePicker from '../containers/NamePicker';
 import NotFound from '../containers/NotFound';
@@ -10,12 +10,12 @@ import RoomCreate from '../containers/RoomCreate';
 
 const Routes = () => (
 	<Switch>
-		<Route exact path="/" component={NamePicker} />
-		<Route path="/room/:roomId" component={Room} />
-		<Route path="/lobby/browse" component={LobbyList} />
-		<Route path="/lobby/create" component={RoomCreate} />
-		<Route exact path="/lobby" component={Lobby} />
-		<Route component={NotFound} />
+		<Route exact path="/" element={<NamePicker />} />
+		<Route path="/room/:roomId" element={<Room />} />
+		<Route path="/lobby/browse" element={<LobbyList />} />
+		<Route path="/lobby/create" element={<RoomCreate />} />
+		<Route exact path="/lobby" element={<Lobby />} />
+		<Route element={<NotFound />} />
 	</Switch>
 );
 

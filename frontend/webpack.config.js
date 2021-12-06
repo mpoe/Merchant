@@ -62,15 +62,17 @@ module.exports = {
   },
   mode: 'development',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'dist'),
     historyApiFallback: true,
     compress: true,
     port: 9000
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: 'src/index.html', to: '../index.html' },
-      { from: 'src/server.js', to: '../server.js' },
-    ],)
-  ]
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/index.html', to: '../index.html' },
+        { from: 'src/server.js', to: '../server.js' },
+      ],
+    }),
+  ],
 };

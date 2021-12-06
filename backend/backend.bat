@@ -1,4 +1,4 @@
-d:
-cd develop/Merchant/backend
+c:
+cd projects\Merchant\backend
 nodemon
 cmd /k
