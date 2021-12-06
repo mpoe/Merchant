@@ -3,7 +3,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var cors = require('cors');
 app.use(cors());
-var io = require('socket.io')(server, { origins: 'localhost:* http://localhost:* http://localhost:* 80.210.66.27:* http://80.210.66.27:* http://80.210.66.27:* '}); //https://github.com/socketio/socket.io-client/issues/641#issuecomment-44756529
+var io = require('socket.io')(server, { origins: 'localhost:* http://localhost:* http://localhost:*'}); //https://github.com/socketio/socket.io-client/issues/641#issuecomment-44756529
 // var io = require('socket.io')(server);
 
 var fs = require('fs');

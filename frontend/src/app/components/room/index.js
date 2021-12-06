@@ -11,7 +11,6 @@ import Actions from '../roomActions';
 import './room.scss';
 
 const Room = ({ room, startGame }) => {
-	console.log(room);
 	const host = room.users && room.users.find(user => user.id === room.host);
 	return (
 		<Background src={bg}>

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import Background from '../background'
+import Background from '../background';
 
 const Game = () => {
     return (

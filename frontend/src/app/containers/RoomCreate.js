@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { PROPTYPE_HISTORY } from '../constants/proptypes';
 import { createRoomRequest } from '../api';
-import RequireName from '../hoc/requireName';
 
 import RoomCreate from '../components/roomCreate';
 
@@ -77,12 +75,4 @@ class RoomCreateContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	state,
-});
-
-const mapDispatchToProps = dispatch => ({
-	/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RequireName('/lobby/create')(RoomCreateContainer));
+export default RoomCreateContainer;

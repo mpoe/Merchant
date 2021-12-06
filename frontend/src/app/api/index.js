@@ -15,7 +15,7 @@ export function getClientID() {
 }
 
 socket.on('GET_ID_RES', (clientID) => {
-	store.dispatch(setUserid(clientID));
+	// store.dispatch(setUserid(clientID));
 });
 
 export function setUserName(username) {
@@ -23,7 +23,19 @@ export function setUserName(username) {
 }
 
 socket.on('SET_USERNAME_RES', (username) => {
-	store.dispatch(setUsername(username));
+	// store.dispatch(setUsername(username));
+});
+
+export function joinRoom(roomId) {
+	socket.emit('JOIN_ROOM', roomId);
+}
+
+export function getRooms() {
+	socket.emit('GET_ROOMS');
+}
+
+socket.on('GOT_ROOMS', (list) => {
+	// store.dispatch(setRoomList(list));
 });
 
 export function joinRoom(roomId) {

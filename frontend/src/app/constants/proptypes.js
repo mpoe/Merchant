@@ -6,6 +6,9 @@ const PROPTYPE_HISTORY = PropTypes.shape({
 
 export const PROPTYPE_TEST = PropTypes.shape({});
 
+const PROPTYPE_CHILDREN = PropTypes.node;
+
 export {
 	PROPTYPE_HISTORY,
-}
+	PROPTYPE_CHILDREN,
+};

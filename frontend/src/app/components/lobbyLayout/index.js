@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { PROPTYPE_CHILDREN } from '../../constants/proptypes';
+
 import './lobbyLayout.scss';
 
 const LobbyLayout = ({ children }) => {
@@ -12,7 +14,15 @@ const LobbyLayout = ({ children }) => {
 				</div>
 			</div>
 		</div>
-	)
+	);
+};
+
+LobbyLayout.propTypes = {
+	children: PROPTYPE_CHILDREN,
+};
+
+LobbyLayout.defaultProps = {
+	children: null,
 };
 
 export default LobbyLayout;
