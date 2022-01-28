@@ -3,9 +3,11 @@ import {
 } from 'redux';
 
 import room from './room';
+import user from './user';
 
 const reducer = combineReducers({
 	room,
+	user,
 });
 
 // @ts-ignore

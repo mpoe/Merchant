@@ -1,43 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+	useLocation,
+	useParams,
+	useNavigate,
+} from 'react-router-dom';
 
 import { /* getClientID */ createRoomRequest, getRooms } from '../api';
 import LobbyList from '../components/lobbyList';
 
-class LobbyListContainer extends React.Component {
-	componentDidMount() {
+const LobbyListContainer = (props) => {
+	console.log('props', props);
+	const nav = useNavigate();
+	useEffect(() => {
 		// getRooms();
-	}
+	}, [])
 
-	componentDidUpdate(prevProps) {
-		// if room is updated (onPublicRoom) -> redirect to /room/:roomId
-		// could probably be handled better. but how?
-		const { state: { room: { room } } } = this.props;
-		const { history: { push } } = this.props;
-		if (prevProps.state.room.room !== room) {
-			push(`/room/${room.id}`);
-		}
-	}
-
-	onPublicRoom = () => {
+	const $onPublicRoom = () => { // needs callback on creation
 		const { state: { user: { id, username } } } = this.props;
 		createRoomRequest({ host: id, password: '', name: `${username}'s room` });
 	}
 
-	onPrivateRoom = () => {
-		const { history: { push } } = this.props;
-		push('/lobby/create');
+	const $onPrivateRoom = () => {
+		nav('/lobby/create');
 	}
 
-	render() {
-		const { state: { room: { rooms } } } = this.props;
-		return (
-			<LobbyList
-				rooms={rooms}
-				onPublicRoom={this.onPublicRoom}
-				onPrivateRoom={this.onPrivateRoom}
-			/>
-		);
-	}
+	// const { state: { room: { rooms } } } = this.props;
+	return (
+		<LobbyList
+			rooms={{ "abc": { id: 'a', name: 'a', users: [] } }}
+			onPublicRoom={$onPublicRoom}
+			onPrivateRoom={$onPrivateRoom}
+		/>
+	);
 }
 
 LobbyListContainer.propTypes = {

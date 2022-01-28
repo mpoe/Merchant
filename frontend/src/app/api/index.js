@@ -15,7 +15,7 @@ export function getClientID() {
 }
 
 socket.on('GET_ID_RES', (clientID) => {
-	// store.dispatch(setUserid(clientID));
+	store.dispatch(setUserid(clientID));
 });
 
 export function setUserName(username) {
@@ -39,6 +39,7 @@ socket.on('GOT_ROOMS', (list) => {
 });
 
 export function createRoomRequest(roomInfo) {
+	console.log('roomInfo', roomInfo);
 	socket.emit('GET_NEXT_ROOM_ID', roomInfo);
 }
 

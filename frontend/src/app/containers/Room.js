@@ -1,55 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import {
+	useLocation,
+	useParams,
+	useNavigate,
+} from 'react-router-dom';
 
 import { joinRoom, getClientID, leaveRoom } from '../api';
 
 import Room from '../components/room';
 
-class RoomContainer extends React.Component {
-	componentDidMount() {
-		const { match: { params: { roomId } } } = this.props;
+const RoomContainer = () => {
+	const params = useParams();
+	const state = useSelector((state) => state);
+	console.log('state', state);
+	const { roomId } = params;
+
+	const { room: { room } } = state;
+	console.log('params', params);
+	useEffect(() => {
 		getClientID(); // On load of the app (first page!) - get the clientid from the backend
 		joinRoom(roomId);
-	}
 
-	componentWillUnmount() {
-		const {
-			state: { user },
-			match: { params: { roomId } },
-		} = this.props;
-		leaveRoom(roomId, user.id);
-	}
+		return () => {
+			/* leaveRoom(roomId, user.id); */
+		}
+	}, []);
 
-	startGame = () => {
+	const $startGame = () => {
 		alert('Not implemented :(');
 	}
 
-	render() {
-		const {
-			match: { params: { roomId } },
-			state: {
-				room: {
-					room,
-				},
-			},
-		} = this.props;
-		return (
-			<Room id={roomId} room={room} startGame={this.startGame} />
-		);
-	}
+	return (
+		<Room id={roomId} room={room} startGame={$startGame} />
+	);
 }
-
-RoomContainer.propTypes = {
-	state: PropTypes.shape({
-		room: PropTypes.shape({
-			room: PropTypes.shape({}),
-		}),
-	}).isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			roomId: PropTypes.string,
-		}),
-	}).isRequired,
-};
 
 export default RoomContainer;

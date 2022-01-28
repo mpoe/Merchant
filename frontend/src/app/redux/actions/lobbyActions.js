@@ -1,4 +1,4 @@
-import { SET_ROOMS, SET_ACTIVE_ROOM } from './actionTypes';
+import { SET_ROOMS, SET_ACTIVE_ROOM, SET_USER_ID } from './actionTypes';
 
 /**
   * @desc Receives the username from the backend, and sets it in redux
@@ -14,3 +14,8 @@ export const setRoom = room => ({
 	type: SET_ACTIVE_ROOM,
 	payload: room,
 });
+
+export const setUserid = userId => ({
+	type: SET_USER_ID,
+	payload: userId,
+})

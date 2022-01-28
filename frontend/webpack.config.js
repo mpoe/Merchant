@@ -1,19 +1,18 @@
 var path = require('path');
 
 var DIST_DIR = path.resolve(__dirname, 'dist');
+console.log('DIST_DIR', DIST_DIR);
 var SRC_DIR = path.resolve(__dirname, 'src');
 var ASSETS_DIR = path.resolve(__dirname, 'assets');
-/* var CONTAINERS_DIR = path.resolve(__dirname, 'app/containers');
-var COMPONENTS_DIR = path.resolve(__dirname, 'app/components'); */
 
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: SRC_DIR + '/app',
   output: {
-    path: DIST_DIR + '/app',
+    path: DIST_DIR,
     filename: 'bundle.js',
-    publicPath: '/app/',
+    publicPath: '/',
   },
   module: {
     rules: [{
@@ -62,17 +61,14 @@ module.exports = {
   },
   mode: 'development',
   devServer: {
-    static: path.join(__dirname, 'dist'),
+    static: path.resolve(__dirname, 'dist'),
     historyApiFallback: true,
     compress: true,
     port: 9000
   },
   plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'src/index.html', to: '../index.html' },
-        { from: 'src/server.js', to: '../server.js' },
-      ],
-    }),
-  ],
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
+  ]
 };

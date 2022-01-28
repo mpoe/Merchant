@@ -1,62 +1,56 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import {
+	useLocation,
+	useParams,
+	useNavigate,
+} from 'react-router-dom';
 
 import { PROPTYPE_HISTORY } from '../constants/proptypes';
 import { getClientID, createRoomRequest } from '../api';
 import Lobby from '../components/lobby';
 import RequireName from '../hoc/requireName';
 
-class LobbyContainer extends React.Component {
-	static propTypes = {
-		state: PropTypes.shape({
-			room: PropTypes.shape({
-				rooms: PropTypes.array,
-				room: PropTypes.shape({
-					id: PropTypes.number,
-				}),
-			}),
-		}).isRequired,
-		history: PROPTYPE_HISTORY.isRequired,
-	}
+const LobbyContainer = () => {
+	const location = useLocation();
+	const params = useParams();
+	const nav = useNavigate();
 
-	componentDidMount() {
+	const state = useSelector((state) => state);
+	console.log('state', state);
+
+	useEffect(() => {
 		getClientID(); // On load of the app (first page!) - get the clientid from the backend
-	}
+	}, [])
 
-	componentDidUpdate(prevProps) {
-		// if room is updated (onPublicRoom) -> redirect to /room/:roomId
-		// could probably be handled better. but how?
-		const { state: { room: { room } } } = this.props;
-		const { history: { push } } = this.props;
-		if (prevProps.state.room.room !== room) {
-			push(`/room/${room.id}`);
+	useEffect(() => {
+		console.log('state', state);
+		console.log('###');
+		if (state.room.room.id) {
+			nav(`/room/${state.room.room.id}`);
 		}
+	}, [state.room.room])
+
+	const $onLobby = () => {
+		nav('/lobby/browse');
 	}
 
-	onLobby = () => {
-		const { history: { push } } = this.props;
-		push('/lobby/browse');
-	}
-
-	onPublicRoom = () => {
-		const { state: { user: { id, username } } } = this.props;
+	const $onPublicRoom = () => {
+		const { user: { id, username } } = state;
 		createRoomRequest({ host: id, password: '', name: `${username}'s room` });
 	}
 
-	onPrivateRoom = () => {
-		const { history: { push } } = this.props;
-		push('/lobby/create');
+	const $onPrivateRoom = () => {
+		nav('/lobby/create');
 	}
 
-	render() {
-		return (
-			<Lobby
-				onPublicRoom={this.onPublicRoom}
-				onPrivateRoom={this.onPrivateRoom}
-				onLobby={this.onLobby}
-			/>
-		);
-	}
+	return (
+		<Lobby
+			onPublicRoom={$onPublicRoom}
+			onPrivateRoom={$onPrivateRoom}
+			onLobby={$onLobby}
+		/>
+	);
 }
 
 export default LobbyContainer;
