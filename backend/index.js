@@ -1,14 +1,23 @@
 // @ts-check
-var app = require('express')();
-var server = require('http').Server(app);
-var cors = require('cors');
-app.use(cors());
-var io = require('socket.io')(server, { origins: 'localhost:* http://localhost:* http://localhost:*'}); //https://github.com/socketio/socket.io-client/issues/641#issuecomment-44756529
-// var io = require('socket.io')(server);
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+
+const { Server } = require("socket.io");
+
+// @ts-ignore
+const io = new Server(server, {
+	cors: {
+		origin: "http://localhost:9000",
+		methods: ["GET", "POST"]
+	}
+});
+
+const port = 8000;
 
 var fs = require('fs');
 
-const port = 8000;
 
 const dbcon = require('./db'); // connection to the database
 
@@ -40,7 +49,7 @@ io.on('connection', (client) => { // client === socket
 					}
 				}
 			});
-			
+
 			users[client.id] = {
 				...users[client.id],
 				username,
@@ -75,7 +84,7 @@ io.on('connection', (client) => { // client === socket
 		client.join(`room-${roomId}`);
 		rooms[`room-${roomId}`] = {
 			...rooms[`room-${roomId}`],
-			users: (rooms[`room-${roomId}`] ? [...rooms[`room-${roomId}`].users, getUser(client.id)] : [getUser(client.id)] ),
+			users: (rooms[`room-${roomId}`] ? [...rooms[`room-${roomId}`].users, getUser(client.id)] : [getUser(client.id)]),
 		}
 		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
 		client.to(`room-${roomId}`).emit('JOINED_ROOM', rooms[`room-${roomId}`]);
@@ -87,6 +96,7 @@ io.on('connection', (client) => { // client === socket
 	})
 
 	function getUser(clientId) {
+		console.log('users', users);
 		return users[clientId];
 	}
 

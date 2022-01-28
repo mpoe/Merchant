@@ -1,78 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import { PROPTYPE_HISTORY } from '../constants/proptypes';
 import { createRoomRequest } from '../api';
 
 import RoomCreate from '../components/roomCreate';
 
-class RoomCreateContainer extends React.Component {
-	static propTypes = {
-		state: PropTypes.shape({
-			room: PropTypes.shape({
-				rooms: PropTypes.array,
-				room: PropTypes.shape({
-					id: PropTypes.number,
-				}),
-			}),
-		}).isRequired,
-		history: PROPTYPE_HISTORY.isRequired,
+const RoomCreateContainer = () => {
+	const [password, setPassword] = useState('');
+	const [roomName, setRoomName] = useState('');
+
+	const nav = useNavigate();
+
+	const $onChangePassword = (e) => {
+		setPassword(e.target.value);
 	}
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			password: '',
-			roomName: '',
-		};
-	}
-
-	componentDidUpdate(prevProps) {
-		// if room is updated (onPublicRoom) -> redirect to /room/:roomId
-		// could probably be handled better. but how?
-		const { state: { room: { room } } } = this.props;
-		const { history: { push } } = this.props;
-		if (prevProps.state.room.room !== room) {
-			push(`/room/${room.id}`);
-		}
-	}
-
-	onChangePassword = (e) => {
-		this.setState({
-			password: e.target.value,
-		});
-	}
-
-	onCreateRoom = () => {
-		const { state: { user: { id } } } = this.props;
-		const { password, roomName } = this.state;
+	const $onCreateRoom = () => {
 		createRoomRequest({ host: id, password, name: roomName });
 	}
 
-	onChangeRoomName = (e) => {
+	const $onChangeRoomName = (e) => {
 		this.setState({
 			roomName: e.target.value,
 		});
 	}
 
-	onCancel = () => {
-		const { history: { push } } = this.props;
-		push('/lobby');
+	const $onCancel = () => {
+		nav('/lobby');
 	}
 
-	render() {
-		const { password, roomName } = this.state;
-		return (
-			<RoomCreate
-				password={password}
-				roomName={roomName}
-				handlePassword={this.onChangePassword}
-				handleRoomName={this.onChangeRoomName}
-				handleCreate={this.onCreateRoom}
-				handleCancel={this.onCancel}
-			/>
-		);
-	}
+	return (
+		<RoomCreate
+			password={password}
+			roomName={roomName}
+			handlePassword={$onChangePassword}
+			handleRoomName={$onChangeRoomName}
+			handleCreate={$onCreateRoom}
+			handleCancel={$onCancel}
+		/>
+	);
 }
 
 export default RoomCreateContainer;

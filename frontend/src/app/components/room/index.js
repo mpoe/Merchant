@@ -11,7 +11,8 @@ import Actions from '../roomActions';
 import './room.scss';
 
 const Room = ({ room, startGame }) => {
-	const host = room.users && room.users.find(user => user.id === room.host);
+	console.log('room', room);
+	const host = room.users && room.users.filter((user) => user).find(user => user.id === room.host);
 	return (
 		<Background src={bg}>
 			<LobbyLayout>
@@ -22,7 +23,7 @@ const Room = ({ room, startGame }) => {
 				</div>
 				<div className="room__container">
 					{room.users && room.users.map(user => (
-						<span className="room__username">{user.username}</span>
+						<span className="room__username">{user?.username}</span>
 					))}
 				</div>
 				<Actions startGame={startGame} />
