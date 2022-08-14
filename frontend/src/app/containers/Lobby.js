@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import {
 	useLocation,
 	useParams,
@@ -15,9 +14,6 @@ const LobbyContainer = () => {
 	const location = useLocation();
 	const params = useParams();
 	const nav = useNavigate();
-
-	const state = useSelector((state) => state);
-	console.log('state', state);
 
 	useEffect(() => {
 		getClientID(); // On load of the app (first page!) - get the clientid from the backend

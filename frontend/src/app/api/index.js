@@ -1,12 +1,4 @@
 import openSocket from 'socket.io-client';
-import {
-	setUsername,
-	setUserid,
-	setRoomList,
-	setRoom,
-} from '../redux/actions/index';
-
-import store from '../redux/reducers';
 
 const socket = openSocket('http://localhost:8000');
 
@@ -15,7 +7,7 @@ export function getClientID() {
 }
 
 socket.on('GET_ID_RES', (clientID) => {
-	store.dispatch(setUserid(clientID));
+	// do something.
 });
 
 export function setUserName(username) {
@@ -23,7 +15,7 @@ export function setUserName(username) {
 }
 
 socket.on('SET_USERNAME_RES', (username) => {
-	// store.dispatch(setUsername(username));
+	// do something.
 });
 
 export function joinRoom(roomId) {
@@ -35,7 +27,7 @@ export function getRooms() {
 }
 
 socket.on('GOT_ROOMS', (list) => {
-	store.dispatch(setRoomList(list));
+	// do something.
 });
 
 export function createRoomRequest(roomInfo) {
@@ -48,7 +40,7 @@ socket.on('GET_NEXT_ROOM_ID_RES', (roomId, roomInfo) => {
 });
 
 socket.on('JOINED_ROOM', ((room) => {
-	store.dispatch(setRoom(room));
+	// do something.
 }));
 
 export function leaveRoom(roomId, userId) {

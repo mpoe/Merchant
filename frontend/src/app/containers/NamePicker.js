@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 
 import { getClientID, setUserName } from '../api';
@@ -10,10 +9,8 @@ const NamePickerContainer = () => {
 	const [username, setUsername] = useState('')
 
 	useEffect(() => {
-		getClientID(); // On load of the app (first page!) - get the clientid from the backend
+		getClientID();
 	}, [])
-
-	console.log(history);
 
 	const handleInput = (e) => {
 		if (e.key === 'Enter') {
@@ -36,11 +33,5 @@ const NamePickerContainer = () => {
 		/>
 	);
 }
-
-NamePickerContainer.propTypes = {
-	// history: PropTypes.shape({
-	// 	push: PropTypes.func,
-	// }).isRequired,
-};
 
 export default NamePickerContainer;
