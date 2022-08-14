@@ -15,16 +15,22 @@ module.exports = {
     publicPath: '/',
   },
   module: {
-    rules: [{
-      test: /\.(js|jsx)$/,
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader'
-          ]
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
       },
       {
         test: /\.css$/,
@@ -37,9 +43,9 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-            "style-loader", // creates style nodes from JS strings
-            "css-loader", // translates CSS into CommonJS
-            "sass-loader" // compiles Sass to CSS, using Node Sass by default
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS, using Node Sass by default
         ]
       },
       {
@@ -55,9 +61,8 @@ module.exports = {
   resolve: {
     alias: {
       'assets': ASSETS_DIR,
-      /* 'containers': CONTAINERS_DIR, 
-      'components': COMPONENTS_DIR,  */
-    }
+    },
+    extensions: ['.tsx', '.ts', '.js', '.json']
   },
   mode: 'development',
   devServer: {

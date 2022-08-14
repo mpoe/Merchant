@@ -7,19 +7,21 @@ import NamePicker from '../components/namepicker';
 const NamePickerContainer = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState('')
+	console.log('username', username);
 
 	useEffect(() => {
 		getClientID();
 	}, [])
 
-	const handleInput = (e) => {
+	const handleInput = (e: any) => {
+		console.log('e', e);
 		if (e.key === 'Enter') {
-			this.submit(e);
+			submit(e);
 		}
-		setUsername(e.target.value);
+		setUsername(e.currentTarget.value);
 	};
 
-	const submit = (e) => {
+	const submit = (e: any) => {
 		e.preventDefault();
 		setUserName(username);
 		navigate('/lobby');
