@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import bg from 'assets/bg-lobby.png';
 
@@ -12,7 +11,13 @@ import RoomInfo from '../lobbyRoomInfo';
 
 import './lobbyList.scss';
 
-const LobbyList = ({ rooms, onPublicRoom, onPrivateRoom }) => (
+interface LobbyListInterface {
+	rooms: Object
+	onPublicRoom: Function;
+	onPrivateRoom: Function,
+}
+
+const LobbyList: FC<LobbyListInterface> = ({ rooms, onPublicRoom, onPrivateRoom }) => (
 	<Background src={bg}>
 		<LobbyLayout>
 			<LobbyHeader title="Lobby" className="lobby-header--80" />
@@ -29,14 +34,5 @@ const LobbyList = ({ rooms, onPublicRoom, onPrivateRoom }) => (
 		</LobbyLayout>
 	</Background>
 );
-
-LobbyList.propTypes = {
-	rooms: PropTypes.shape({
-		id: PropTypes.number,
-		name: PropTypes.string,
-	}).isRequired,
-	onPublicRoom: PropTypes.func.isRequired,
-	onPrivateRoom: PropTypes.func.isRequired,
-};
 
 export default LobbyList;

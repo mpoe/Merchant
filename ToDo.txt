@@ -13,7 +13,6 @@ Find a lobby (list of open lobbies)
 
 Implement and use these libraries:
 🗸 Sass + loader
-☐ Redux-saga
 🗸 Look into tmux!
 🗸 set up react-router
 🗸 set up eslint file

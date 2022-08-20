@@ -1,40 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import {
 	useLocation,
 	useParams,
 	useNavigate,
 } from 'react-router-dom';
 
-import { PROPTYPE_HISTORY } from '../constants/proptypes';
 import { getClientID, createRoomRequest } from '../api';
 import Lobby from '../components/lobby';
-import RequireName from '../hoc/requireName';
 
 const LobbyContainer = () => {
-	const location = useLocation();
-	const params = useParams();
+	// const location = useLocation();
+	// const params = useParams();
 	const nav = useNavigate();
 
 	useEffect(() => {
 		getClientID(); // On load of the app (first page!) - get the clientid from the backend
 	}, [])
 
-	useEffect(() => {
-		console.log('state', state);
-		console.log('###');
-		if (state.room.room.id) {
-			nav(`/room/${state.room.room.id}`);
-		}
-	}, [state.room.room])
-
 	const $onLobby = () => {
 		nav('/lobby/browse');
 	}
 
-	const $onPublicRoom = () => {
-		const { user: { id, username } } = state;
-		createRoomRequest({ host: id, password: '', name: `${username}'s room` });
-	}
+	// const $onPublicRoom = () => {
+	// 	const { user: { id, username } } = state;
+	// 	createRoomRequest({ host: id, password: '', name: `${username}'s room` });
+	// }
 
 	const $onPrivateRoom = () => {
 		nav('/lobby/create');
@@ -42,7 +32,7 @@ const LobbyContainer = () => {
 
 	return (
 		<Lobby
-			onPublicRoom={$onPublicRoom}
+			// onPublicRoom={$onPublicRoom}
 			onPrivateRoom={$onPrivateRoom}
 			onLobby={$onLobby}
 		/>

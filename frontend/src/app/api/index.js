@@ -36,6 +36,8 @@ export function createRoomRequest(roomInfo) {
 }
 
 socket.on('GET_NEXT_ROOM_ID_RES', (roomId, roomInfo) => {
+	console.log('roomId', roomId);
+	console.log('roomInfo', roomInfo);
 	socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo }); // must emit object, since socket.on cannot take more than 1 parameter.
 });
 

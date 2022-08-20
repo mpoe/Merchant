@@ -39,30 +39,20 @@ io.on('connection', (client) => { // client === socket
 	})
 
 	client.on('SET_USERNAME_REQ', (username) => {
-		io.clients((error, clients) => {
-			if (error) throw error;
-			clients.map((clientId) => {
-				if (clientId !== client.id) {
-					if (users[clientId] && (users[clientId].username === username)) {
-						username = username + userNumber;
-						userNumber++;
-					}
-				}
-			});
+		// check if username exists
+		users[client.id] = {
+			...users[client.id],
+			username,
+			id: client.id,
+		};
 
-			users[client.id] = {
-				...users[client.id],
-				username,
-				id: client.id,
-			};
+		console.log('users', users);
 
-			client.emit('SET_USERNAME_RES', username);
-		});
+		client.emit('SET_USERNAME_RES', username);
 	})
 
 	client.on('CREATE_ROOM', ({ roomId, roomSettings }) => {
 		client.join(`room-${roomId}`);
-		console.log(client.id);
 		rooms[`room-${roomId}`] = {
 			...roomSettings,
 			id: roomId,

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 
 import bg from 'assets/bg-lobby.png';
 
@@ -11,7 +10,16 @@ import CreateRoomActions from '../roomCreateActions';
 
 import './roomCreate.scss';
 
-const RoomCreate = ({
+interface RoomCreateInterFace {
+	roomName: string;
+	handleRoomName: Function;
+	password: string;
+	handlePassword: Function;
+	handleCancel: Function;
+	handleCreate: Function;
+}
+
+const RoomCreate: FC<RoomCreateInterFace> = ({
 	roomName,
 	handleRoomName,
 	password,
@@ -48,15 +56,5 @@ const RoomCreate = ({
 		</LobbyLayout>
 	</Background>
 );
-
-RoomCreate.propTypes = {
-	roomName: PropTypes.string.isRequired,
-	handleRoomName: PropTypes.func.isRequired,
-	password: PropTypes.string.isRequired,
-	handlePassword: PropTypes.func.isRequired,
-	handleCancel: PropTypes.func.isRequired,
-	handleCreate: PropTypes.func.isRequired,
-
-};
 
 export default RoomCreate;

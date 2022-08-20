@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-import { PROPTYPE_HISTORY } from '../constants/proptypes';
 import { createRoomRequest } from '../api';
 
 import RoomCreate from '../components/roomCreate';
@@ -10,21 +8,22 @@ import RoomCreate from '../components/roomCreate';
 const RoomCreateContainer = () => {
 	const [password, setPassword] = useState('');
 	const [roomName, setRoomName] = useState('');
+	console.log('roomName', roomName);
 
 	const nav = useNavigate();
 
-	const $onChangePassword = (e) => {
+	const $onChangePassword = (e: any) => {
 		setPassword(e.target.value);
 	}
 
 	const $onCreateRoom = () => {
-		createRoomRequest({ host: id, password, name: roomName });
+		console.log('create');
+		createRoomRequest({ host: 'testttestetest', password, name: roomName });
 	}
 
-	const $onChangeRoomName = (e) => {
-		this.setState({
-			roomName: e.target.value,
-		});
+	const $onChangeRoomName = (e: any) => {
+		console.log('e', e);
+		setRoomName(e.target.value)
 	}
 
 	const $onCancel = () => {

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 
 import bg from 'assets/bg-frontpage.png';
 
@@ -8,20 +7,12 @@ interface BackGroundInterface {
 	children: React.ReactNode;
 }
 
-const Background: FC<BackGroundInterface> = (props) => {
+const Background: FC<BackGroundInterface> = ({ src, children } = { src: bg, children: null }) => {
 	return (
-		<div className="namepicker__bg" style={{ backgroundImage: `url(${props.src})` }}>
-			{props.children}
+		<div className="namepicker__bg" style={{ backgroundImage: `url(${src})` }}>
+			{children}
 		</div>
 	);
-};
-
-Background.propTypes = {
-	src: PropTypes.any,
-};
-
-Background.defaultProps = {
-	src: bg,
 };
 
 export default Background;

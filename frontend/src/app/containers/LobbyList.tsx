@@ -5,26 +5,23 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
-import { /* getClientID */ createRoomRequest, getRooms } from '../api';
+import { getClientID, createRoomRequest, getRooms } from '../api';
 import LobbyList from '../components/lobbyList';
 
-const LobbyListContainer = (props) => {
-	console.log('props', props);
+const LobbyListContainer = () => {
 	const nav = useNavigate();
 	useEffect(() => {
 		// getRooms();
 	}, [])
 
 	const $onPublicRoom = () => { // needs callback on creation
-		const { state: { user: { id, username } } } = this.props;
-		createRoomRequest({ host: id, password: '', name: `${username}'s room` });
+		createRoomRequest({ host: 'tetetetete', password: '', name: `<Someone>'s room` });
 	}
 
 	const $onPrivateRoom = () => {
 		nav('/lobby/create');
 	}
 
-	// const { state: { room: { rooms } } } = this.props;
 	return (
 		<LobbyList
 			rooms={{ "abc": { id: 'a', name: 'a', users: [] } }}
@@ -33,8 +30,5 @@ const LobbyListContainer = (props) => {
 		/>
 	);
 }
-
-LobbyListContainer.propTypes = {
-};
 
 export default LobbyListContainer;

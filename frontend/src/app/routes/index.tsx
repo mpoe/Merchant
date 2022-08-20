@@ -10,11 +10,11 @@ import RoomCreate from '../containers/RoomCreate';
 
 const Routes = () => (
 	<Switch>
-		<Route exact path="/" element={<NamePicker />} />
+		<Route path="/" element={<NamePicker />} />
 		<Route path="/room/:roomId" element={<Room />} />
 		<Route path="/lobby/browse" element={<LobbyList />} />
 		<Route path="/lobby/create" element={<RoomCreate />} />
-		<Route exact path="/lobby" element={<Lobby />} />
+		<Route path="/lobby" element={<Lobby />} />
 		<Route element={<NotFound />} />
 	</Switch>
 );

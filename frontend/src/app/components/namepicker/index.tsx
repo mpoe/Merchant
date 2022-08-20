@@ -1,4 +1,3 @@
-// @ts-check
 import React, { FC } from 'react';
 
 import './namepicker.scss';
@@ -26,7 +25,7 @@ const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit }) => (
 				className="namepicker__input"
 				labelText="NAME"
 			/>
-			<Button onClick={(e) => submit(e)} text="play" className="namepicker__submit" />
+			<Button onClick={(e: any) => submit(e)} text="play" className="namepicker__submit" />
 		</div>
 	</Background>
 );

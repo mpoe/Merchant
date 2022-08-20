@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Room } from '../../constants/types';
 
 import './lobbyRoomInfo.scss';
 
-const LockIcon = require('assets/lock-icon.png');
+import LockIcon from '../../../../assets/lock-icon.png';
 
-const LobbyList = ({ room }) => (
-	<Fragment>
+interface LobbyListInterface {
+	room: Room;
+}
+
+const LobbyList: FC<LobbyListInterface> = ({ room }) => (
+	<>
 		<div className="room-info">
 			<div className="room-info__public">
 				<span className="room-name">
@@ -20,15 +24,7 @@ const LobbyList = ({ room }) => (
 				<span className="room-password"><img className="icon" alt="lock icon" src={LockIcon} /></span>
 			)}
 		</div>
-	</Fragment>
+	</>
 );
-
-LobbyList.propTypes = {
-	room: PropTypes.shape({
-		id: PropTypes.number,
-		name: PropTypes.string,
-		password: PropTypes.string,
-	}).isRequired,
-};
 
 export default LobbyList;

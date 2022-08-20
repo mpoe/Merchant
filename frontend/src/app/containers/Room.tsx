@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, FC } from 'react';
 import {
 	useLocation,
 	useParams,
@@ -7,10 +6,13 @@ import {
 } from 'react-router-dom';
 
 import { joinRoom, getClientID, leaveRoom } from '../api';
+import { User } from '../constants/types';
 
 import Room from '../components/room';
 
-const RoomContainer = () => {
+interface RoomContainerInterface { }
+
+const RoomContainer: FC<RoomContainerInterface> = () => {
 	const params = useParams();
 	const { roomId } = params;
 
@@ -25,6 +27,15 @@ const RoomContainer = () => {
 
 	const $startGame = () => {
 		alert('Not implemented :(');
+	}
+
+	const users: Array<User> = [];
+
+	const room = {
+		name: 'test',
+		users,
+		password: '',
+		host: 'tetete',
 	}
 
 	return (
