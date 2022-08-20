@@ -35,10 +35,12 @@ dbcon.connect((err) => {
 
 io.on('connection', (client) => { // client === socket
 	client.on('GET_ID_REQ', () => {
+		console.log('get id ####');
 		client.emit('GET_ID_RES', client.id);
 	})
 
 	client.on('SET_USERNAME_REQ', (username) => {
+		console.log('username', username);
 		// check if username exists
 		users[client.id] = {
 			...users[client.id],
@@ -91,7 +93,8 @@ io.on('connection', (client) => { // client === socket
 	}
 
 	client.on('disconnect', (test) => { //event listener
-		// console.log('ABD');
+		console.log('client.id', client.id);
+		console.log('ABD');
 	})
 
 	client.on('disconnecting', (test) => { //event listener

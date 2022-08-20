@@ -5,17 +5,13 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
-import { getClientID, createRoomRequest } from '../api';
+// import { getClientID, createRoomRequest } from '../api';
 import Lobby from '../components/lobby';
 
 const LobbyContainer = () => {
 	// const location = useLocation();
 	// const params = useParams();
 	const nav = useNavigate();
-
-	useEffect(() => {
-		getClientID(); // On load of the app (first page!) - get the clientid from the backend
-	}, [])
 
 	const $onLobby = () => {
 		nav('/lobby/browse');

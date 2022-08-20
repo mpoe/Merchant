@@ -1,7 +1,3 @@
-import openSocket from 'socket.io-client';
-
-const socket = openSocket('http://localhost:8000');
-
 export function getClientID() {
 	socket.emit('GET_ID_REQ');
 }
@@ -31,13 +27,10 @@ socket.on('GOT_ROOMS', (list) => {
 });
 
 export function createRoomRequest(roomInfo) {
-	console.log('roomInfo', roomInfo);
 	socket.emit('GET_NEXT_ROOM_ID', roomInfo);
 }
 
 socket.on('GET_NEXT_ROOM_ID_RES', (roomId, roomInfo) => {
-	console.log('roomId', roomId);
-	console.log('roomInfo', roomInfo);
 	socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo }); // must emit object, since socket.on cannot take more than 1 parameter.
 });
 

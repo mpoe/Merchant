@@ -5,7 +5,7 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
-import { joinRoom, getClientID, leaveRoom } from '../api';
+// import { joinRoom, getClientID, leaveRoom } from '../api';
 import { User } from '../constants/types';
 
 import Room from '../components/room';
@@ -17,8 +17,8 @@ const RoomContainer: FC<RoomContainerInterface> = () => {
 	const { roomId } = params;
 
 	useEffect(() => {
-		getClientID(); // On load of the app (first page!) - get the clientid from the backend
-		joinRoom(roomId);
+		// getClientID(); // On load of the app (first page!) - get the clientid from the backend
+		// joinRoom(roomId);
 
 		return () => {
 			/* leaveRoom(roomId, user.id); */

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { createRoomRequest } from '../api';
+// import { createRoomRequest } from '../api';
 
 import RoomCreate from '../components/roomCreate';
 
 const RoomCreateContainer = () => {
 	const [password, setPassword] = useState('');
 	const [roomName, setRoomName] = useState('');
-	console.log('roomName', roomName);
 
 	const nav = useNavigate();
 
@@ -17,12 +16,10 @@ const RoomCreateContainer = () => {
 	}
 
 	const $onCreateRoom = () => {
-		console.log('create');
-		createRoomRequest({ host: 'testttestetest', password, name: roomName });
+		// createRoomRequest({ host: 'testttestetest', password, name: roomName });
 	}
 
 	const $onChangeRoomName = (e: any) => {
-		console.log('e', e);
 		setRoomName(e.target.value)
 	}
 

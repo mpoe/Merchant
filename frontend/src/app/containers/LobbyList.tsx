@@ -5,7 +5,7 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
-import { getClientID, createRoomRequest, getRooms } from '../api';
+// import { getClientID, createRoomRequest, getRooms } from '../api';
 import LobbyList from '../components/lobbyList';
 
 const LobbyListContainer = () => {
@@ -15,7 +15,7 @@ const LobbyListContainer = () => {
 	}, [])
 
 	const $onPublicRoom = () => { // needs callback on creation
-		createRoomRequest({ host: 'tetetetete', password: '', name: `<Someone>'s room` });
+		// createRoomRequest({ host: 'tetetetete', password: '', name: `<Someone>'s room` });
 	}
 
 	const $onPrivateRoom = () => {

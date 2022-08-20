@@ -1,7 +1,6 @@
 var path = require('path');
 
 var DIST_DIR = path.resolve(__dirname, 'dist');
-console.log('DIST_DIR', DIST_DIR);
 var SRC_DIR = path.resolve(__dirname, 'src');
 var ASSETS_DIR = path.resolve(__dirname, 'assets');
 

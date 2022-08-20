@@ -17,7 +17,6 @@ interface RoomInterface {
 }
 
 const Room: FC<RoomInterface> = ({ room, startGame, id }) => {
-	console.log('room', room);
 	const host = room.users?.filter((user) => user).find(user => user.id === room.host);
 	return (
 		<Background src={bg}>

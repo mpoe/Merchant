@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { getClientID, setUserName } from '../api';
+// import { getClientID, setUserName } from '../api';
 import NamePicker from '../components/namepicker';
+import { useSocket } from '../hooks/socket';
 
 const NamePickerContainer = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState('')
-	console.log('username', username);
-
-	useEffect(() => {
-		getClientID();
-	}, [])
+	const socket = useSocket();
 
 	const handleInput = (e: any) => {
-		console.log('e', e);
 		if (e.key === 'Enter') {
 			submit(e);
 		}
@@ -23,7 +19,8 @@ const NamePickerContainer = () => {
 
 	const submit = (e: any) => {
 		e.preventDefault();
-		setUserName(username);
+		socket.emit('SET_USERNAME_REQ', username);
+		// setUserName(username);
 		navigate('/lobby');
 	}
 

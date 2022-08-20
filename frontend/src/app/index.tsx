@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { SocketProvider } from './contexts/socket';
 
 import Router from './routes';
 
@@ -10,5 +11,7 @@ const container = document.getElementById('app');
 
 const root = createRoot(container);
 root.render(<BrowserRouter>
-	<Router />
+	<SocketProvider>
+		<Router />
+	</SocketProvider>
 </BrowserRouter>)

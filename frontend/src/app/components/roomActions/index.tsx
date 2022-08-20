@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import Button from '../button';
 
-interface LobbyActionsInterface {
+interface RoomActionsInterface {
 	startGame: Function;
 }
 
-const LobbyActions: FC<LobbyActionsInterface> = ({ startGame }) => (
+const RoomActions: FC<RoomActionsInterface> = ({ startGame }) => (
 	<div className="bottom-action">
 		<Button className="button--colored button--small" onClick={startGame} text="start game" />
 	</div>
 );
 
-export default LobbyActions;
+export default RoomActions;
