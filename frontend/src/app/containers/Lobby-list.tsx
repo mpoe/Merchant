@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	useNavigate,
 } from 'react-router-dom';
@@ -9,10 +9,24 @@ import { useSocket } from '../hooks/socket';
 const LobbyListContainer = () => {
 	const nav = useNavigate();
 	const socket = useSocket();
+	const [rooms, setRooms] = useState([]);
 
 	useEffect(() => {
-		// getRooms();
-	}, [])
+		if (socket) {
+			socket.emit('GET_ROOMS')
+
+			socket.on('GET_ROOMS_RES', (roomsRes: any) => {
+				setRooms(roomsRes)
+			})
+			socket.on('ROOM_CREATED', (roomsRes: any) => {
+				setRooms(roomsRes)
+			})
+			return () => {
+				socket.off("GET_ROOMS_RES");
+				socket.off("ROOM_CREATED");
+			};
+		}
+	}, [socket])
 
 	const $onPublicRoom = () => {
 		socket.emit('GET_NEXT_ROOM_ID');
@@ -24,7 +38,7 @@ const LobbyListContainer = () => {
 
 	return (
 		<LobbyList
-			rooms={{ "abc": { id: 'a', name: 'a', users: [] } }}
+			rooms={rooms}
 			onPublicRoom={$onPublicRoom}
 			onPrivateRoom={$onPrivateRoom}
 		/>

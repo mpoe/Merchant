@@ -46,7 +46,7 @@ io.on('connection', (client) => { // client === socket
 		client.join(`room-${roomId}`);
 		rooms[`room-${roomId}`] = {
 			password: '',
-			name: 'test',
+			name: `room-${roomId}`,
 			...roomSettings,
 			id: roomId,
 			users: [],
@@ -56,7 +56,7 @@ io.on('connection', (client) => { // client === socket
 	})
 
 	client.on('GET_ROOMS', () => {
-		client.emit('GOT_ROOMS', rooms);
+		client.emit('GET_ROOMS_RES', rooms);
 	})
 
 	client.on('GET_NEXT_ROOM_ID', (roomInfo) => {
@@ -75,6 +75,7 @@ io.on('connection', (client) => { // client === socket
 		}
 		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
 		client.to(`room-${roomId}`).emit('JOINED_ROOM', rooms[`room-${roomId}`]);
+		io.emit('ROOM_CREATED', rooms);
 	})
 
 	client.on('LEAVE_ROOM', ({ roomId }) => {
