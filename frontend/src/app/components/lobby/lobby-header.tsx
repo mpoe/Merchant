@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 
-import './lobbyHeader.scss';
+import './lobby-header.scss';
 
 interface LobbyHeaderInterface {
 	title: String;

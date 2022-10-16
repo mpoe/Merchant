@@ -10,7 +10,6 @@ interface SocketProviderInterface {
 const SocketProvider: FC<SocketProviderInterface> = ({ children }) => {
     const [Socket, setSocket] = useState(null);
     const socket = openSocket('http://localhost:8000');
-    console.log('socket', socket);
     socket.on('connect', () => {
         if (Socket) {
             return null;

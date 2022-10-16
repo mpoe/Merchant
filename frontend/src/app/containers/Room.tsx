@@ -1,45 +1,41 @@
-import React, { useEffect, FC } from 'react';
-import {
-	useLocation,
-	useParams,
-	useNavigate,
-} from 'react-router-dom';
+import React, { useEffect, FC, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-// import { joinRoom, getClientID, leaveRoom } from '../api';
-import { User } from '../constants/types';
-
-import Room from '../components/room';
+import Room from '../components/game/room/room';
+import { useSocket } from '../hooks/socket';
 
 interface RoomContainerInterface { }
 
 const RoomContainer: FC<RoomContainerInterface> = () => {
 	const params = useParams();
 	const { roomId } = params;
+	const socket = useSocket();
+	const [room, setRoom] = useState(null);
 
 	useEffect(() => {
-		// getClientID(); // On load of the app (first page!) - get the clientid from the backend
-		// joinRoom(roomId);
+		if (socket) {
+			socket.emit('JOIN_ROOM', roomId);
+		}
 
 		return () => {
-			/* leaveRoom(roomId, user.id); */
+			if (socket) {
+				socket.emit('LEAVE_ROOM', { roomId });
+			}
 		}
-	}, []);
+	}, [socket]);
+
+	if (socket) {
+		socket.on('JOINED_ROOM', (data: any) => {
+			setRoom(data);
+		})
+	}
 
 	const $startGame = () => {
 		alert('Not implemented :(');
 	}
 
-	const users: Array<User> = [];
-
-	const room = {
-		name: 'test',
-		users,
-		password: '',
-		host: 'tetete',
-	}
-
 	return (
-		<Room id={roomId} room={room} startGame={$startGame} />
+		<Room room={room} startGame={$startGame} />
 	);
 }
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Button from '../button';
+import Button from '../interactions/button';
 import Background from '../background';
 
 import './lobby.scss';

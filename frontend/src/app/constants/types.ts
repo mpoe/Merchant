@@ -1,13 +1,14 @@
 type User = {
-	id: String;
-	username: String;
+	id: string;
+	username: string;
 }
 
 type Room = {
-	name: String,
+	name: string,
 	users: Array<User>,
-	password: String,
-	host: String,
+	password: string,
+	host: User,
+	id: number,
 }
 
 export {

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Room } from '../../constants/types';
 
-import './lobbyRoomInfo.scss';
+import './lobby-room-info.scss';
 
 import LockIcon from '../../../../assets/lock-icon.png';
 

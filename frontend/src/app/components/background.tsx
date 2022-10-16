@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import bg from '../../../../assets/bg-frontpage.png';
+import bg from '../../../assets/bg-frontpage.png';
 
 interface BackGroundInterface {
 	src?: string;

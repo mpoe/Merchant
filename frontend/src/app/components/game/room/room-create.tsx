@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import bg from 'assets/bg-lobby.png';
 
-import Background from '../background';
-import LobbyHeader from '../header';
-import LobbyLayout from '../lobbyLayout';
-import Input from '../input';
-import CreateRoomActions from '../roomCreateActions';
+import Background from '../../background';
+import LobbyHeader from '../../lobby/lobby-header';
+import LobbyLayout from '../../lobby/lobby-layout';
+import Input from '../../interactions/input';
+import CreateRoomActions from './room-create-actions';
 
-import './roomCreate.scss';
+import './room-create.scss';
 
 interface RoomCreateInterFace {
 	roomName: string;

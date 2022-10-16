@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import './lobbyLayout.scss';
+import './lobby-layout.scss';
 
 interface LobbyLayoutInterface {
 	children: React.ReactNode;

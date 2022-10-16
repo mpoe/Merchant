@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-// import { getClientID, setUserName } from '../api';
 import NamePicker from '../components/namepicker';
 import { useSocket } from '../hooks/socket';
 
@@ -20,7 +19,6 @@ const NamePickerContainer = () => {
 	const submit = (e: any) => {
 		e.preventDefault();
 		socket.emit('SET_USERNAME_REQ', username);
-		// setUserName(username);
 		navigate('/lobby');
 	}
 

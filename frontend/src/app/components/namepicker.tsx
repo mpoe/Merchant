@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 
 import './namepicker.scss';
 
-import Input from '../input';
-import Button from '../button';
-import Background from '../background';
+import Input from './interactions/input';
+import Button from './interactions/button';
+import Background from './background';
 
 interface NamePickerProps {
 	submit: Function;

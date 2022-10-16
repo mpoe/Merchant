@@ -1,20 +1,19 @@
 .namepicker {
-    padding-top: 17%;
-    display: flex;
-    flex-direction: column;
-    padding-right: 19%;
-    padding-left: 55%;
+	padding-top: 17%;
+	display: flex;
+	flex-direction: column;
+	padding-right: 19%;
+	padding-left: 55%;
 
 	&__title {
 		font-family: 'lovelyn';
 		font-size: 5em;
 		padding-bottom: 37px;
 	}
-	
+
 	&__bg {
 		width: 100%;
 		background-position: center center;
-		background-size: contain;
 		background-repeat: no-repeat;
 		max-height: 100vh;
 	}

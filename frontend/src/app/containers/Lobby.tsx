@@ -1,34 +1,44 @@
-import React, { useEffect, FC } from 'react';
+import React from 'react';
 import {
-	useLocation,
-	useParams,
 	useNavigate,
 } from 'react-router-dom';
 
-// import { getClientID, createRoomRequest } from '../api';
-import Lobby from '../components/lobby';
+import Lobby from '../components/lobby/lobby';
+import { Room } from '../constants/types';
+import { useSocket } from '../hooks/socket';
+
+
 
 const LobbyContainer = () => {
-	// const location = useLocation();
-	// const params = useParams();
 	const nav = useNavigate();
+	const socket = useSocket();
 
 	const $onLobby = () => {
 		nav('/lobby/browse');
 	}
 
-	// const $onPublicRoom = () => {
-	// 	const { user: { id, username } } = state;
-	// 	createRoomRequest({ host: id, password: '', name: `${username}'s room` });
-	// }
+	const $onPublicRoom = () => {
+		socket.emit('GET_NEXT_ROOM_ID');
+	}
 
 	const $onPrivateRoom = () => {
 		nav('/lobby/create');
 	}
 
+	if (socket) {
+		socket.on('GET_NEXT_ROOM_ID_RES', (res: { roomId: string; roomInfo: Object; }) => {
+			const { roomId, roomInfo } = res;
+			socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo });
+		});
+
+		socket.on('JOINED_ROOM', (room: Room) => {
+			nav(`/room/${room.id}`)
+		})
+	}
+
 	return (
 		<Lobby
-			// onPublicRoom={$onPublicRoom}
+			onPublicRoom={$onPublicRoom}
 			onPrivateRoom={$onPrivateRoom}
 			onLobby={$onLobby}
 		/>

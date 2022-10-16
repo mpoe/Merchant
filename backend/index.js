@@ -3,10 +3,9 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-
 const { Server } = require("socket.io");
+var fs = require('fs');
 
-// @ts-ignore
 const io = new Server(server, {
 	cors: {
 		origin: "http://localhost:9000",
@@ -16,13 +15,9 @@ const io = new Server(server, {
 
 const port = 8000;
 
-var fs = require('fs');
-
-
 const dbcon = require('./db'); // connection to the database
 
-const users = {};
-
+let users = {};
 const rooms = {};
 
 let userNumber = 10000;
@@ -35,30 +30,27 @@ dbcon.connect((err) => {
 
 io.on('connection', (client) => { // client === socket
 	client.on('GET_ID_REQ', () => {
-		console.log('get id ####');
 		client.emit('GET_ID_RES', client.id);
 	})
 
 	client.on('SET_USERNAME_REQ', (username) => {
-		console.log('username', username);
-		// check if username exists
 		users[client.id] = {
 			...users[client.id],
 			username,
 			id: client.id,
 		};
-
 		console.log('users', users);
-
-		client.emit('SET_USERNAME_RES', username);
 	})
 
 	client.on('CREATE_ROOM', ({ roomId, roomSettings }) => {
 		client.join(`room-${roomId}`);
 		rooms[`room-${roomId}`] = {
+			password: '',
+			name: 'test',
 			...roomSettings,
 			id: roomId,
 			users: [],
+			host: users[client.id]
 		}
 		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
 	})
@@ -68,11 +60,14 @@ io.on('connection', (client) => { // client === socket
 	})
 
 	client.on('GET_NEXT_ROOM_ID', (roomInfo) => {
-		client.emit('GET_NEXT_ROOM_ID_RES', roomId, roomInfo);
+		client.emit('GET_NEXT_ROOM_ID_RES', { roomId, roomInfo });
 		roomId++;
 	})
 
 	client.on('JOIN_ROOM', (roomId) => {
+		if (!getUser(client.id)) {
+			createGuestUser(client.id);
+		}
 		client.join(`room-${roomId}`);
 		rooms[`room-${roomId}`] = {
 			...rooms[`room-${roomId}`],
@@ -82,23 +77,26 @@ io.on('connection', (client) => { // client === socket
 		client.to(`room-${roomId}`).emit('JOINED_ROOM', rooms[`room-${roomId}`]);
 	})
 
-	client.on('LEAVE_ROOM', (roomInfo) => {
-		console.log(roomInfo);
+	client.on('LEAVE_ROOM', ({ roomId }) => {
 		console.log(rooms);
+		console.log('roomId', roomId);
 	})
 
 	function getUser(clientId) {
-		console.log('users', users);
 		return users[clientId];
 	}
 
-	client.on('disconnect', (test) => { //event listener
-		console.log('client.id', client.id);
-		console.log('ABD');
-	})
+	function createGuestUser(clientId) {
+		users[clientId] = {
+			username: `guest${userNumber}`,
+			id: clientId,
+		};
+		userNumber++
+	}
 
-	client.on('disconnecting', (test) => { //event listener
-		//console.log('DISCONNECT');
+	client.on('disconnect', () => {
+		const { [client.id]: del, ...rest } = users;
+		users = rest;
 	})
 });
 

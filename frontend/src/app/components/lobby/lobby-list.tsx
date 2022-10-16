@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import bg from 'assets/bg-lobby.png';
 
 import Background from '../background';
-import LobbyHeader from '../header';
-import LobbyLayout from '../lobbyLayout';
-import LobbyActions from '../lobbyActions';
-import RoomInfo from '../lobbyRoomInfo';
+import LobbyHeader from './lobby-header';
+import LobbyLayout from './lobby-layout';
+import LobbyActions from './lobby-actions';
+import RoomInfo from './lobby-room-info';
 
-import './lobbyList.scss';
+import './lobby-list.scss';
 
 interface LobbyListInterface {
 	rooms: Object
