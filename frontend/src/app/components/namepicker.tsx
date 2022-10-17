@@ -20,10 +20,10 @@ const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit }) => (
 				value={username}
 				name="username"
 				onChange={(e: any) => handleInput(e)}
-				placeholder="nickname"
+				placeholder="Username"
 				containerClass="namepicker__input-container"
 				className="namepicker__input"
-				labelText="NAME"
+				labelText=""
 			/>
 			<Button onClick={(e: any) => submit(e)} text="play" className="namepicker__submit" />
 		</div>

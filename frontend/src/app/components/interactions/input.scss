@@ -21,11 +21,9 @@
     }
 
     &__label {
-        display: flex;
-        flex: 1;
         font-family: 'lovelyn';
-        font-size: 3em;
     }
+
     &:focus {
         outline: none;
     }

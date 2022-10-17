@@ -1,5 +1,5 @@
 import React, { useEffect, FC, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Room from '../components/game/room/room';
 import { useSocket } from '../hooks/socket';
@@ -11,6 +11,7 @@ const RoomContainer: FC<RoomContainerInterface> = () => {
 	const { roomId } = params;
 	const socket = useSocket();
 	const [room, setRoom] = useState(null);
+	const nav = useNavigate();
 
 	useEffect(() => {
 		if (socket) {
@@ -34,8 +35,17 @@ const RoomContainer: FC<RoomContainerInterface> = () => {
 		alert('Not implemented :(');
 	}
 
+	const $goToLobby = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		nav('../lobby/browse');
+	};
+
 	return (
-		<Room room={room} startGame={$startGame} />
+		<Room
+			room={room}
+			startGame={$startGame}
+			goToLobby={$goToLobby}
+		/>
 	);
 }
 
