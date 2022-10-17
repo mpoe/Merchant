@@ -18,14 +18,13 @@ const port = 8000;
 const dbcon = require('./db'); // connection to the database
 
 let users = {};
-const rooms = {};
+let rooms = {};
 
 let userNumber = 10000;
 let roomId = 44444;
 
-dbcon.connect((err) => {
-	// console.log('connect');
-}); // connect to the database, this will happen on server start.
+/* dbcon.connect((err) => {
+}); // connect to the database, this will happen on server start. */
 
 
 io.on('connection', (client) => { // client === socket
@@ -39,10 +38,12 @@ io.on('connection', (client) => { // client === socket
 			username,
 			id: client.id,
 		};
-		console.log('users', users);
 	})
 
 	client.on('CREATE_ROOM', ({ roomId, roomSettings }) => {
+		if (!getUser(client.id)) {
+			createGuestUser(client.id);
+		}
 		client.join(`room-${roomId}`);
 		rooms[`room-${roomId}`] = {
 			password: '',
@@ -79,8 +80,17 @@ io.on('connection', (client) => { // client === socket
 	})
 
 	client.on('LEAVE_ROOM', ({ roomId }) => {
-		console.log(rooms);
-		console.log('roomId', roomId);
+		const room = rooms[`room-${roomId}`];
+		const users = room.users.filter((user) => user.id !== client.id);
+		if (users.length === 0) {
+			const { [`room-${roomId}`]: omit, ...rest } = rooms;
+			rooms = omit;
+			return;
+		}
+		rooms = rooms[`room-${roomId}`] = {
+			...rooms[`room-${roomId}`],
+			users,
+		}
 	})
 
 	function getUser(clientId) {
@@ -103,5 +113,4 @@ io.on('connection', (client) => { // client === socket
 
 server.listen(port, function () {
 	console.log('Server listening at port %d', port);
-	//fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
 });

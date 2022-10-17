@@ -9,6 +9,7 @@ import Input from '../../interactions/input';
 import CreateRoomActions from './room-create-actions';
 
 import './room-create.scss';
+import LobbyGoToButton from '../../../containers/Lobby-goto-button';
 
 interface RoomCreateInterFace {
 	roomName: string;
@@ -29,6 +30,7 @@ const RoomCreate: FC<RoomCreateInterFace> = ({
 }) => (
 	<Background src={bg}>
 		<LobbyLayout>
+			<LobbyGoToButton />
 			<LobbyHeader title="create room" />
 			<div className="room-create__container">
 				<Input

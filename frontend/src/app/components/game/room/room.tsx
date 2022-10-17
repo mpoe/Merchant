@@ -9,14 +9,14 @@ import Actions from './room-actions';
 import { Room } from '../../../constants/types';
 
 import './room.scss';
+import LobbyGoToButton from '../../../containers/Lobby-goto-button';
 
 interface RoomInterface {
 	room?: Room;
 	startGame: Function;
-	goToLobby: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Room: FC<RoomInterface> = ({ room, startGame, goToLobby }) => {
+const Room: FC<RoomInterface> = ({ room, startGame }) => {
 	if (!room) {
 		return null;
 	}
@@ -24,7 +24,7 @@ const Room: FC<RoomInterface> = ({ room, startGame, goToLobby }) => {
 	return (
 		<Background src={bg}>
 			<LobbyLayout>
-				<button onClick={goToLobby}>{`${'< Back to lobby'}`}</button>
+				<LobbyGoToButton />
 				<Header title={room.name} />
 				<div className="room__info">
 					<span>{`${room.users.length} player(s) waiting`}</span>

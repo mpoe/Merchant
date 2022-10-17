@@ -6,7 +6,7 @@ import { useSocket } from '../hooks/socket';
 
 const NamePickerContainer = () => {
 	const navigate = useNavigate();
-	const [username, setUsername] = useState('')
+	const [username, setUsername] = useState('mpoe')
 	const socket = useSocket();
 
 	const handleInput = (e: any) => {
@@ -18,6 +18,9 @@ const NamePickerContainer = () => {
 
 	const submit = (e: any) => {
 		e.preventDefault();
+		if (username.length === 0) {
+			return alert('must input username')
+		}
 		socket.emit('SET_USERNAME_REQ', username);
 		navigate('/lobby');
 	}

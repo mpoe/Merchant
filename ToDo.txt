@@ -16,12 +16,11 @@ Implement and use these libraries:
 🗸 Look into tmux!
 🗸 set up react-router
 🗸 set up eslint file
-☐ use ts-check
 🗸 make app redirect if condition is not met
 🗸 classnames
 ☐ Private lobby
 ☐ public lobby
-☐ usernames from socket
+🗸 usernames from socket
 ☐ Lobby pregame
 ☐ draft
 ☐ game

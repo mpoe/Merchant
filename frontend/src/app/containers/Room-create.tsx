@@ -25,7 +25,7 @@ const RoomCreateContainer = () => {
 	}
 
 	const $onCancel = () => {
-		nav('/lobby');
+		nav('/lobby/browse');
 	}
 
 	if (socket) {
