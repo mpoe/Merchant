@@ -11,20 +11,25 @@ import RoomInfo from './lobby-room-info';
 
 import './lobby-list.scss';
 
-interface LobbyListInterface {
-	rooms: Object
-	onPublicRoom: Function;
-	onPrivateRoom: Function,
+type ClickRoomFunction = {
+	(event: React.MouseEvent<HTMLAnchorElement>, room: Object): void;
 }
 
-const LobbyList: FC<LobbyListInterface> = ({ rooms, onPublicRoom, onPrivateRoom }) => (
+interface LobbyListInterface {
+	rooms: Object;
+	onPublicRoom: Function;
+	onPrivateRoom: Function;
+	onClickRoom: ClickRoomFunction;
+}
+
+const LobbyList: FC<LobbyListInterface> = ({ rooms, onPublicRoom, onPrivateRoom, onClickRoom }) => (
 	<Background src={bg}>
 		<LobbyLayout>
 			<LobbyHeader title="Lobby" className="lobby-header--80" />
 			<div className="lobby-wrapper">
 				<div className="lobby-content">
 					{Object.values(rooms).map(room => (
-						<Link key={room.id} to={`/room/${room.id}`}>
+						<Link key={room.id} onClick={(event) => onClickRoom(event, room)} to={`/room/${room.id}`}>
 							<RoomInfo room={room} />
 						</Link>
 					))}

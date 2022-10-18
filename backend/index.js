@@ -84,13 +84,18 @@ io.on('connection', (client) => { // client === socket
 		const users = room.users.filter((user) => user.id !== client.id);
 		if (users.length === 0) {
 			const { [`room-${roomId}`]: omit, ...rest } = rooms;
-			rooms = omit;
+			rooms = rest;
+			io.emit('ROOM_REMOVED', rooms);
 			return;
 		}
-		rooms = rooms[`room-${roomId}`] = {
-			...rooms[`room-${roomId}`],
-			users,
+		rooms = {
+			...rooms,
+			[`room-${roomId}`]: {
+				...rooms[`room-${roomId}`],
+				users,
+			},
 		}
+		client.to(`room-${roomId}`).emit('LEFT_ROOM', rooms[`room-${roomId}`]);
 	})
 
 	function getUser(clientId) {

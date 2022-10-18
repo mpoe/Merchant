@@ -1,26 +1,35 @@
 @font-face {
-    font-family: 'Lovelyn';
-    src: local('Lovelyn'), url('../../assets/Lovelyn.ttf') format('truetype');
-  }
-
-body {
-    margin: 0;
-    display: flex;
-    flex: 1;
-    min-height: 100vh;
-    min-width: 100vw;
+	font-family: 'Lovelyn';
+	src: local('Lovelyn'), url('../../assets/Lovelyn.ttf') format('truetype');
 }
 
-span, h1, h2, h3, h4, h5, h6, button, p {
+body {
+	margin: 0;
+	display: flex;
+	flex: 1;
+	min-height: 100vh;
+	min-width: 100vw;
+	background-color: black;
+}
+
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+p {
 	font-family: 'lovelyn';
 	margin: 0;
 }
 
 #app {
-    display: flex;
-    min-height: 100vh;
-    min-width: 100vw;
-    justify-content: center;
+	display: flex;
+	min-height: 100vh;
+	min-width: 100vw;
+	justify-content: center;
 }
 
 a {

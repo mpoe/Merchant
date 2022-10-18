@@ -17,9 +17,12 @@ const LobbyListRoom: FC<LobbyListInterface> = ({ room }) => {
 					<span className="room-name">
 						{room.name}
 					</span>
-					<span className="room-users">
-						{`${room.users.length} user(s)`}
-					</span>
+					<div>
+						<span className="room-users">
+							{`${room.users.length}/4`}
+						</span>
+						<span className="host-name"> - {room.host.username}</span>
+					</div>
 				</div>
 				{room.password !== '' && (
 					<span className="room-password"><img className="icon" alt="lock icon" src={LockIcon} /></span>

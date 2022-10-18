@@ -1,6 +1,9 @@
 .room-info {
 	display: flex;
 	justify-content: space-between;
+	background-color: rgba(32, 24, 19, 0.3);
+	margin: 10px;
+
 	&__public {
 		display: flex;
 		flex-direction: column;
@@ -23,4 +26,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.host-name {
+	font-size: 40px;
+	color: goldenrod;
 }

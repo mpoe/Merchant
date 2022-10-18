@@ -16,20 +16,16 @@ const LobbyListContainer = () => {
 		if (socket) {
 			socket.emit('GET_ROOMS');
 
-			socket.on('GET_ROOMS_RES', (roomsRes: any) => {
-				console.log('roomsRes GET', roomsRes);
+			socket.on('GET_ROOMS_RES', (roomsRes: Object) => {
 				setRooms(roomsRes);
 			});
 
-			socket.on('ROOM_CREATED', (roomsRes: any) => {
-				console.log('roomsRes CREATED', roomsRes);
+			socket.on('ROOM_CREATED', (roomsRes: Object) => {
 				setRooms(roomsRes);
 			});
 
 			socket.on('GET_NEXT_ROOM_ID_RES', (res: { roomId: string; roomInfo: Object; }) => {
 				const { roomId, roomInfo } = res;
-				console.log('GET_NEXT_ROOM_ID_RES');
-
 				socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo });
 			});
 
@@ -37,11 +33,16 @@ const LobbyListContainer = () => {
 				nav(`/room/${room.id}`)
 			})
 
+			socket.on('ROOM_REMOVED', (roomsRes: Object) => {
+				setRooms(roomsRes);
+			})
+
 			return () => {
 				socket.off("GET_ROOMS_RES");
 				socket.off("ROOM_CREATED");
 				socket.off("GET_NEXT_ROOM_ID_RES");
 				socket.off("JOINED_ROOM");
+				socket.off("ROOM_REMOVED");
 			};
 		}
 	}, [socket])
@@ -54,13 +55,23 @@ const LobbyListContainer = () => {
 		nav('/lobby/create');
 	}
 
-	console.log('rooms', rooms);
+	const $onClickRoom = (e: React.MouseEvent<HTMLAnchorElement>, room: Room) => {
+		if (room.password !== '') {
+			let psw = window.prompt('Enter password');
+			if (!(psw === room.password)) {
+				e.preventDefault();
+			}
+		} else if (room.users.length > 4) {
+			e.preventDefault();
+		}
+	}
 
 	return (
 		<LobbyList
 			rooms={rooms}
 			onPublicRoom={$onPublicRoom}
 			onPrivateRoom={$onPrivateRoom}
+			onClickRoom={$onClickRoom}
 		/>
 	);
 }
