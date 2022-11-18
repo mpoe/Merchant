@@ -1,0 +1,46 @@
+Lobby phase?:
+Player / Observer / (Host?)
+Ready? (-mvp)
+
+Draft phase:
+Player order random,
+set customers,
+set deck,
+
+first user allowed to pick card, remove card chosen from deck
+
+Game phase:
+Round,
+Customer,
+Player hands,
+Player order,
+
+Round over,
+FT4, how does it scale? with 2-3-4-x people 7-10-13-X*3+1?
+Winner starts next round,
+
+Scoreboard phase:
+(-mvp)
+
+
+rooms = { room-id: { roominfo }, room-id2: { room2info} ...},
+
+socket-Room = `room-${roomId}`
+
+room:state: {
+    users: {
+        ...User,
+        status: player|observer|host?
+    }
+    phase: {
+        name: "game",
+        round: 2/X,
+    },
+    deck: [Card],
+    playerDecks: {clientId: [Card]},
+    playerHands: {clientId: [Card]},
+    playerDiscards: {clientId: [Card]},
+    playerOrder: [ClientId, ...]; // should we do this?
+    activePlayer: ClientId, // should we do this?
+    customers: [Customer]
+}

@@ -5,18 +5,19 @@ import bg from 'assets/bg-lobby.png';
 import Background from '../../background';
 import Header from '../../lobby/lobby-header';
 import LobbyLayout from '../../lobby/lobby-layout';
-import Actions from './room-actions';
 import { Room } from '../../../constants/types';
 
 import './room.scss';
 import LobbyGoToButton from '../../../containers/Lobby-goto-button';
+import Button from '../../interactions/button';
 
 interface RoomInterface {
 	room?: Room;
 	startGame: Function;
+	isHost: Boolean;
 }
 
-const Room: FC<RoomInterface> = ({ room, startGame }) => {
+const Room: FC<RoomInterface> = ({ room, startGame, isHost }) => {
 	if (!room) {
 		return null;
 	}
@@ -35,7 +36,11 @@ const Room: FC<RoomInterface> = ({ room, startGame }) => {
 						<span key={user.id} className="room__username">{user.username}</span>
 					))}
 				</div>
-				<Actions startGame={startGame} />
+				{isHost && (
+					<div className="bottom-action">
+						<Button className="button--colored button--small" onClick={startGame} text="start game" />
+					</div>
+				)}
 			</LobbyLayout>
 		</Background>
 	);

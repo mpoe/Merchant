@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import RoomCreate from '../components/game/room/room-create';
+import RoomCreate from '../components/game/room/create/room-create';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
@@ -28,16 +28,22 @@ const RoomCreateContainer = () => {
 		nav('/lobby/browse');
 	}
 
-	if (socket) {
-		socket.on('GET_NEXT_ROOM_ID_RES', (res: { roomId: string; roomInfo: Object; }) => {
-			const { roomId, roomInfo } = res;
-			socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo });
-		});
+	useEffect(() => {
+		if (socket) {
+			socket.on('GET_NEXT_ROOM_ID_RES', (res: { roomId: string; roomInfo: Object; }) => {
+				const { roomId, roomInfo } = res;
+				socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo });
+			});
 
-		socket.on('JOINED_ROOM', (room: Room) => {
-			nav(`/room/${room.id}`)
-		})
-	}
+			socket.on('JOINED_ROOM', (room: Room) => {
+				nav(`/room/${room.id}`)
+			})
+			return () => {
+				socket.off("GET_NEXT_ROOM_ID_RES");
+				socket.off('JOINED_ROOM');
+			}
+		}
+	}, [socket]);
 
 	return (
 		<RoomCreate

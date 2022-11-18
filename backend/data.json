@@ -1,0 +1,17 @@
+{
+    "customers": [
+        {
+            "name": "Farmer",
+            "budget": 600,
+            "id": 1
+        }
+    ],
+    "cards": [
+        {
+            "name": "Raspberry",
+            "amount": 3,
+            "cost": 200,
+            "id": 1
+        }
+    ]
+}
