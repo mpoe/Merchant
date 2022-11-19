@@ -1,9 +1,54 @@
 {
     "customers": [
         {
-            "name": "Farmer",
+            "name": "Farmer - Mo",
             "budget": 600,
             "id": 1
+        },
+        {
+            "name": "Farmer - Bas",
+            "budget": 600,
+            "id": 8
+        },
+        {
+            "name": "Older woman 1",
+            "budget": 1000,
+            "id": 2
+        },
+        {
+            "name": "Older woman 2",
+            "budget": 600,
+            "id": 9
+        },
+        {
+            "name": "Punker",
+            "budget": 1200,
+            "id": 3
+        },
+        {
+            "name": "Boy",
+            "budget": 1600,
+            "id": 4
+        },
+        {
+            "name": "Bird",
+            "budget": 2000,
+            "id": 5
+        },
+        {
+            "name": "Chef",
+            "budget": 2200,
+            "id": 6
+        },
+        {
+            "name": "Dog",
+            "budget": 2600,
+            "id": 7
+        },
+        {
+            "name": "Inu",
+            "budget": 2600,
+            "id": 10
         }
     ],
     "cards": [
@@ -12,6 +57,48 @@
             "amount": 3,
             "cost": 200,
             "id": 1
+        },
+        {
+            "name": "Wheat",
+            "amount": 2,
+            "cost": 300,
+            "id": 2
+        },
+        {
+            "name": "Hat",
+            "amount": 1,
+            "cost": 400,
+            "id": 3
+        },
+        {
+            "name": "Milk",
+            "amount": 2,
+            "cost": 500,
+            "id": 4
+        },
+        {
+            "name": "Apple",
+            "amount": 3,
+            "cost": 800,
+            "id": 5
+        },
+        {
+            "name": "Leather",
+            "amount": 4,
+            "cost": 1100,
+            "id": 6
+        },
+        {
+            "name": "Shovel",
+            "amount": 3,
+            "cost": 1200,
+            "id": 7
+        },
+        {
+            "name": "Cow horn",
+            "amount": 2,
+            "cost": 1800,
+            "id": 8
         }
     ]
 }
