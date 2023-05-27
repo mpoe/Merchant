@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Lovelyn';
-	src: local('Lovelyn'), url('../../assets/Lovelyn.ttf') format('truetype');
+	src: url('../../assets/lovelyn.ttf') format('truetype');
 }
 
 body {
@@ -21,7 +21,7 @@ h5,
 h6,
 button,
 p {
-	font-family: 'lovelyn';
+	font-family: 'Lovelyn';
 	margin: 0;
 }
 
@@ -30,6 +30,8 @@ p {
 	min-height: 100vh;
 	min-width: 100vw;
 	justify-content: center;
+	align-items: center;
+	background-color: burlywood;
 }
 
 a {

@@ -60,8 +60,6 @@ const RoomContainer = () => {
 		);
 	}
 
-	console.log('room', room);
-
 	if (room.state.phase === DRAFT_PHASE) {
 		return (
 			<Game
