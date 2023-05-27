@@ -1,6 +1,6 @@
 var path = require('path');
 
-var DIST_DIR = path.resolve(__dirname, 'dist');
+var DIST_DIR = path.resolve(__dirname, '../dist');
 var SRC_DIR = path.resolve(__dirname, 'src');
 var ASSETS_DIR = path.resolve(__dirname, 'assets');
 
@@ -65,7 +65,7 @@ module.exports = {
   },
   mode: 'development',
   devServer: {
-    static: path.resolve(__dirname, 'dist'),
+    static: DIST_DIR,
     historyApiFallback: true,
     compress: true,
     port: 9000
