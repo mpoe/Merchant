@@ -6,10 +6,11 @@ const SocketContext = createContext(null);
 interface SocketProviderInterface {
     children: React.ReactNode;
 }
+declare const SOCKET_URL: string;
 
 const SocketProvider: FC<SocketProviderInterface> = ({ children }) => {
     const [Socket, setSocket] = useState(null);
-    const socket = openSocket('http://localhost:8000');
+    const socket = openSocket(SOCKET_URL);
     socket.on('connect', () => {
         if (Socket) {
             return null;

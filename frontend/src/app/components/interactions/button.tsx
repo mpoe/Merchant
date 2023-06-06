@@ -5,8 +5,8 @@ import './button.scss';
 
 interface CustomButtonInterface {
 	onClick: Function;
-	text: String;
-	className?: String;
+	text: string;
+	className?: string;
 }
 
 const CustomButton: FC<CustomButtonInterface> = ({ onClick, text, className }) => (

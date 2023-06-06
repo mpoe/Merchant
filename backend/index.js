@@ -1,9 +1,9 @@
-const { Socket } = require('dgram');
 const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const path = require('path')
 
 const data = require('./data.json');
 
@@ -11,14 +11,14 @@ const { customers, cards } = data;
 
 const io = new Server(server, {
 	cors: {
-		origin: "http://localhost:9000",
+		origin: "http://localhost:9000", // make sure that this point to external ip when hosting site
 		methods: ["GET", "POST"]
 	}
 });
 
-const port = 8000;
+const port = 80;
 
-const dbcon = require('./db'); // connection to the database
+// const dbcon = require('./db'); // connection to the database
 
 const debug = true;
 
@@ -43,7 +43,7 @@ let roomId = 44444;
 }); // connect to the database, this will happen on server start. */
 
 
-/****** Usefull stuff ******/
+/****** Useful stuff ******/
 // const clients = io.sockets.adapter.rooms.get(`room-${roomId}`);
 
 
@@ -154,6 +154,24 @@ io.on('connection', (client) => { // client === socket
 		io.to(`room-${roomId}`).emit('GAME_STARTED', rooms[`room-${roomId}`]);
 	})
 
+	client.on('DRAFT_CARD', ({ id, roomId }) => {
+		console.log('roomId', roomId);
+		console.log('id', id);
+		rooms = {
+			...rooms,
+			[`room-${roomId}`]: {
+				...rooms[`room-${roomId}`],
+				state: {
+					...rooms[`room-${roomId}`].state,
+					draftpool: rooms[`room-${roomId}`].state.draftpool.filter((card) => card.id !== id)
+				},
+			},
+		}
+		client.emit('CARD_DRAFTED', rooms[`room-${roomId}`])
+		io.to(`room-${roomId}`).emit('CARD_DRAFTED', rooms[`room-${roomId}`]);
+		io.emit('GAME_STATE', { rooms, users })
+	})
+
 	function getUser(clientId) {
 		return users[clientId];
 	}
@@ -197,7 +215,7 @@ io.on('connection', (client) => { // client === socket
 		};
 	}
 
-	client.on('SEED_GAME', () => {
+	client.on('SEED_DRAFT', () => {
 		users[client.id] = {
 			...users[client.id],
 			username: 'mpoe_test',
@@ -205,9 +223,9 @@ io.on('connection', (client) => { // client === socket
 		};
 		rooms = {
 			...rooms,
-			[`room-test`]: {
+			[`room-1`]: {
 				password: '',
-				name: `room-test`,
+				name: `room-1`,
 				id: 1,
 				users: [createSeedBot(), getPlayerUser(client.id)],
 				host: users[client.id],
@@ -220,11 +238,49 @@ io.on('connection', (client) => { // client === socket
 				}
 			},
 		};
-		client.emit('GAME_SEEDED', rooms[`room-test`])
+		client.emit('DRAFT_SEEDED', rooms[`room-1`])
+		io.emit('GAME_STATE', { rooms, users })
+
+	})
+
+	client.on('SEED_GAME', () => {
+		users[client.id] = {
+			...users[client.id],
+			username: 'mpoe_test',
+			id: client.id,
+		};
+		rooms = {
+			...rooms,
+			[`room-1`]: {
+				password: '',
+				name: `room-1`,
+				id: 1,
+				users: [createSeedBot(), getPlayerUser(client.id)],
+				host: users[client.id],
+				state: {
+					phase: DRAFT_PHASE,
+					round: null, // set after draft
+					cardpool: cards,
+					draftpool: cards,
+					customers: customers,
+				}
+			},
+		};
+		client.emit('GAME_SEEDED', rooms[`room-1`])
 		io.emit('GAME_STATE', { rooms, users })
 	})
 });
 
 server.listen(port, function () {
-	console.log('Server listening at port %d', port);
+	console.log('Server listening at port', port);
 });
+
+const ROOT_PATH = path.resolve(__dirname, '..');
+const HTML_PATH = path.join(ROOT_PATH, '/dist/index.html');
+const DIST_PATH = path.join(ROOT_PATH, '/dist');
+
+app.use(express.static(DIST_PATH))
+
+app.get('*', (req, res) => {
+	res.sendFile(HTML_PATH);
+})

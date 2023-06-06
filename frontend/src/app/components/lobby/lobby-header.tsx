@@ -4,8 +4,8 @@ import classnames from 'classnames';
 import './lobby-header.scss';
 
 interface LobbyHeaderInterface {
-	title: String;
-	className?: String;
+	title: string;
+	className?: string;
 }
 
 const LobbyHeader: FC<LobbyHeaderInterface> = ({ title, className } = { title: '', className: null }) => (

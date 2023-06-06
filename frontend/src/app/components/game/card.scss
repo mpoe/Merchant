@@ -1,0 +1,19 @@
+.card {
+    width: 133px;
+    aspect-ratio: 0.69012485811577752553916004540295;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 11px;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    display: flex;
+    justify-self: center;
+
+    &__title {
+        position: absolute;
+        bottom: 20%;
+        left: 10%;
+        pointer-events: none;
+    }
+}

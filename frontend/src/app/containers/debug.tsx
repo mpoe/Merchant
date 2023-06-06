@@ -21,9 +21,13 @@ const DebugContainer = () => {
         socket.emit('SEED_GAME')
     }
 
+    const $seedDraft = () => {
+        socket.emit('SEED_DRAFT');
+    }
+
     return (
         <>
-            <div style={{ width: '30%', backgroundColor: 'bisque', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ width: '20%', backgroundColor: 'bisque', display: 'flex', flexDirection: 'column', position: 'absolute', right: '2%' }}>
                 <>
                     Server state:
 
@@ -37,7 +41,6 @@ const DebugContainer = () => {
                     })}
                     <div><strong>rooms:</strong></div>
                     {serverState && Object.values(serverState.rooms).map((room: Room) => {
-                        console.log('room', room);
                         return (
                             <div key={room.id}>
                                 <p>customers: <strong>{room.state.customers.map((customer: Customer) => {
@@ -58,7 +61,7 @@ const DebugContainer = () => {
                             </div>
                         )
                     })}
-                    <CustomButton onClick={$seedRoom} text="seed" />
+                    <CustomButton onClick={$seedDraft} text="seed" />
                 </>
             </div>
         </>

@@ -7,7 +7,7 @@ import Router from './routes';
 import Debug from './containers/debug';
 
 import './main.css';
-import GameContainer from './containers/Game';
+import DraftContainer from './containers/Draft';
 
 const container = document.getElementById('app');
 
@@ -15,7 +15,7 @@ const root = createRoot(container);
 root.render(<BrowserRouter>
 	<SocketProvider>
 		{/* <Router /> */}
-		<GameContainer />
+		<DraftContainer />
 		<Debug />
 	</SocketProvider>
 </BrowserRouter>)

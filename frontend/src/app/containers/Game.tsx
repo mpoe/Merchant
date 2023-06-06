@@ -4,8 +4,6 @@ import Game from '../components/game/game';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-const debug = true;
-
 const GameContainer = () => {
     const socket = useSocket();
     const [room, setRoom] = useState(null);
