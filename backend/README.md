@@ -6,4 +6,4 @@ Starting the server from scratch:
 After this has been set up, all that is left is to run
 node index.js
 
-The server is currently hosted on port 8000
+The server is currently hosted on port 80

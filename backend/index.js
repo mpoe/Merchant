@@ -4,14 +4,22 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const path = require('path')
+const fs = require('fs');
 
 const data = require('./data.json');
 
 const { customers, cards } = data;
 
+const currentPath = path.join(__dirname);
+const basePath = currentPath + '/.env';
+const envPath = basePath + '.' + process.env.env;
+const finalPath = fs.existsSync(envPath) ? envPath : basePath;
+
+const fileEnv = require('dotenv').config({ path: finalPath }).parsed;
+
 const io = new Server(server, {
 	cors: {
-		origin: "http://localhost:9000", // make sure that this point to external ip when hosting site
+		origin: fileEnv.SOCKET_SOURCE, // make sure that this point to external ip when hosting site
 		methods: ["GET", "POST"]
 	}
 });
