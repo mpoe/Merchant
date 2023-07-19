@@ -17,7 +17,7 @@ const RoomCreateContainer = () => {
 	}
 
 	const $onCreateRoom = () => {
-		socket.emit('GET_NEXT_ROOM_ID', { password, name: roomName });
+		socket.emit('CREATE_ROOM', { password, name: roomName });
 	}
 
 	const $onChangeRoomName = (e: any) => {
@@ -30,16 +30,11 @@ const RoomCreateContainer = () => {
 
 	useEffect(() => {
 		if (socket) {
-			socket.on('GET_NEXT_ROOM_ID_RES', (res: { roomId: string; roomInfo: Object; }) => {
-				const { roomId, roomInfo } = res;
-				socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo });
-			});
 
 			socket.on('JOINED_ROOM', (room: Room) => {
 				nav(`/room/${room.id}`)
 			})
 			return () => {
-				socket.off("GET_NEXT_ROOM_ID_RES");
 				socket.off('JOINED_ROOM');
 			}
 		}

@@ -39,6 +39,18 @@ let rooms = {};
 let userNumber = 10000;
 let roomId = 44444;
 
+const LOBBY_STATE = {
+	phase: LOBBY_PHASE,
+	score: null, // set after draft
+	round: null, // set after draft
+	deck: null,
+	playerDecks: null,
+	playerHands: null,
+	playerDiscards: null, // do we want/need this?
+	playerStatus: null,
+	customers: [],
+}
+
 /* dbcon.connect((err) => {
 }); // connect to the database, this will happen on server start. */
 
@@ -64,7 +76,8 @@ io.on('connection', (client) => { // client === socket
 		client.emit('YOU_ARE', getUser(client.id))
 	})
 
-	client.on('CREATE_ROOM', ({ roomId, roomSettings }) => {
+	client.on('CREATE_ROOM', ({ roomSettings }) => {
+		roomId++;
 		if (!getUser(client.id)) {
 			createGuestUser(client.id);
 		}
@@ -76,28 +89,13 @@ io.on('connection', (client) => { // client === socket
 			id: roomId,
 			users: [],
 			host: users[client.id],
-			state: {
-				phase: LOBBY_PHASE,
-				score: null, // set after draft
-				round: null, // set after draft
-				deck: null,
-				playerDecks: null,
-				playerHands: null,
-				playerDiscards: null, // do we want/need this?
-				playerStatus: null,
-				customers: [],
-			}
+			state: LOBBY_STATE,
 		}
 		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
 	})
 
 	client.on('GET_ROOMS', () => {
 		client.emit('GET_ROOMS_RES', rooms);
-	})
-
-	client.on('GET_NEXT_ROOM_ID', (roomInfo) => {
-		client.emit('GET_NEXT_ROOM_ID_RES', { roomId, roomInfo });
-		roomId++;
 	})
 
 	client.on('JOIN_ROOM', (roomId) => {
@@ -118,7 +116,7 @@ io.on('connection', (client) => { // client === socket
 		io.emit('ROOM_CREATED', rooms); // notify all users
 	})
 
-	client.on('LEAVE_ROOM', ({ roomId }) => {
+	client.on('LEAVE_ROOM', (roomId) => {
 		const room = rooms[`room-${roomId}`];
 		if (room) {
 			const users = room.users.filter((user) => user.id !== client.id);
@@ -135,6 +133,7 @@ io.on('connection', (client) => { // client === socket
 					users,
 				},
 			}
+			io.emit('ROOM_UPDATED', rooms); // notify all users
 			client.leave(`room-${roomId}`);
 			io.to(`room-${roomId}`).emit('LEFT_ROOM', rooms[`room-${roomId}`]);
 		}
@@ -216,6 +215,7 @@ io.on('connection', (client) => { // client === socket
 	}
 
 	client.on('SEED_DRAFT', () => {
+		const botUser1 = createSeedBot();
 		users[client.id] = {
 			...users[client.id],
 			username: 'mpoe_test',
@@ -224,17 +224,18 @@ io.on('connection', (client) => { // client === socket
 		rooms = {
 			...rooms,
 			[`room-1`]: {
-				password: '',
-				name: `room-1`,
-				id: 1,
-				users: [createSeedBot(), getPlayerUser(client.id)],
-				host: users[client.id],
+				password: '', // public info
+				name: `room-1`, // public info
+				id: 1, // public info
+				users: [botUser1, getUser(client.id)], // public info
+				host: users[client.id], // public info
 				state: {
 					phase: DRAFT_PHASE,
 					round: null, // set after draft
 					cardpool: cards,
 					draftpool: cards,
 					customers: customers,
+					players: [botUser1, getPlayerUser(client.id)],
 				}
 			},
 		};

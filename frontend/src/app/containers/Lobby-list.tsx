@@ -24,10 +24,9 @@ const LobbyListContainer = () => {
 				setRooms(roomsRes);
 			});
 
-			socket.on('GET_NEXT_ROOM_ID_RES', (res: { roomId: string; roomInfo: Object; }) => {
-				const { roomId, roomInfo } = res;
-				socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo });
-			});
+			socket.on('ROOM_UPDATED', (roomsRes: Object) => {
+				setRooms(roomsRes);
+			})
 
 			socket.on('JOINED_ROOM', (room: Room) => {
 				nav(`/room/${room.id}`)
@@ -40,7 +39,7 @@ const LobbyListContainer = () => {
 			return () => {
 				socket.off("GET_ROOMS_RES");
 				socket.off("ROOM_CREATED");
-				socket.off("GET_NEXT_ROOM_ID_RES");
+				socket.off("ROOM_UPDATED");
 				socket.off("JOINED_ROOM");
 				socket.off("ROOM_REMOVED");
 			};
@@ -48,7 +47,7 @@ const LobbyListContainer = () => {
 	}, [socket])
 
 	const $onPublicRoom = () => {
-		socket.emit('GET_NEXT_ROOM_ID');
+		socket.emit('CREATE_ROOM');
 	}
 
 	const $onPrivateRoom = () => {

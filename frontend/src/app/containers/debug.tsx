@@ -25,6 +25,8 @@ const DebugContainer = () => {
         socket.emit('SEED_DRAFT');
     }
 
+    console.log('serverState', serverState);
+
     return (
         <>
             <div style={{ width: '20%', backgroundColor: 'bisque', display: 'flex', flexDirection: 'column', position: 'absolute', right: '2%' }}>

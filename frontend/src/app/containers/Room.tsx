@@ -32,7 +32,7 @@ const RoomContainer = () => {
 			});
 			return () => {
 				socket.removeAllListers();
-				socket.emit('LEAVE_ROOM', { roomId });
+				socket.emit('LEAVE_ROOM', roomId);
 			}
 		}
 	}, [socket]);
