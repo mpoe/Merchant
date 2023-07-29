@@ -1,4 +1,3 @@
-c:
 cd www\merchant\backend
-nodemon
+npm run start:dev
 cmd /k

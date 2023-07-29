@@ -2,13 +2,13 @@
     "env": {
         "browser": true,
         "es6": true
-		},
+    },
     "extends": "airbnb",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
-		},
-		"parser": "babel-eslint",
+    },
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -22,12 +22,32 @@
         "import"
     ],
     "rules": {
-        "linebreak-style": ["error", "windows"],
-        "indent": ["error", "tab"],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "indent": [
+            "error",
+            "tab"
+        ],
         "no-tabs": 0,
-        "react/jsx-filename-extension": [0],
-        "react/jsx-indent": [1, "tab"],
-        "react/jsx-indent-props": [1, "tab"],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        "react/jsx-filename-extension": [
+            0
+        ],
+        "react/jsx-indent": [
+            1,
+            "tab"
+        ],
+        "react/jsx-indent-props": [
+            1,
+            "tab"
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
+        "semi": 1
     }
 }

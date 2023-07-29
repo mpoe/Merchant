@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import bg from 'assets/bg-lobby.png';
 
-import Background from '../background';
+import { Background } from '../background';
 import LobbyHeader from './lobby-header';
-import LobbyLayout from './lobby-layout';
+import LobbyLayout from './wrapper';
 import LobbyActions from './lobby-actions';
 import RoomInfo from './lobby-room-info';
 

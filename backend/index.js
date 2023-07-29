@@ -4,27 +4,19 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const path = require('path')
-const fs = require('fs');
 
 const data = require('./data.json');
 
 const { customers, cards } = data;
 
-const currentPath = path.join(__dirname);
-const basePath = currentPath + '/.env';
-const envPath = basePath + '.' + process.env.env;
-const finalPath = fs.existsSync(envPath) ? envPath : basePath;
-
-const fileEnv = require('dotenv').config({ path: finalPath }).parsed;
-
 const io = new Server(server, {
 	cors: {
-		origin: fileEnv.SOCKET_SOURCE, // make sure that this point to external ip when hosting site
+		origin: process.env.SOCKET_SOURCE, // make sure that this point to external ip when hosting site
 		methods: ["GET", "POST"]
 	}
 });
 
-const port = 80;
+const port = process.env.PORT;
 
 // const dbcon = require('./db'); // connection to the database
 
@@ -84,7 +76,7 @@ io.on('connection', (client) => { // client === socket
 		client.emit('YOU_ARE', getUser(client.id))
 	})
 
-	client.on('CREATE_ROOM', ({ roomSettings }) => {
+	client.on('CREATE_ROOM', ({ roomSettings } = {}) => {
 		roomId++;
 		if (!getUser(client.id)) {
 			createGuestUser(client.id);

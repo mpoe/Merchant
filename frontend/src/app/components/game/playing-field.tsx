@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import Background from '../background';
+import { Background } from '../background';
 import playmat from '../../../../assets/bg-playmat.svg';
 import gamemat from '../../../../assets/bg-game.svg';
 

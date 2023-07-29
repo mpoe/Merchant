@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Background from '../components/background';
+import { Background } from '../components/background';
 import Game from '../components/game/game';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Button from '../interactions/button';
-import Background from '../background';
+import { Background } from '../background';
 
 import './lobby.scss';
 
@@ -11,7 +11,7 @@ interface LobbyInterface {
 	onLobby: Function;
 }
 
-const Lobby: FC<LobbyInterface> = ({ onPublicRoom, onPrivateRoom, onLobby } = { onPublicRoom: () => { }, onLobby: null, onPrivateRoom: null }) => (
+export const Lobby: FC<LobbyInterface> = ({ onPublicRoom, onPrivateRoom, onLobby } = { onPublicRoom: () => { }, onLobby: null, onPrivateRoom: null }) => (
 	<Background>
 		<div className="lobby__container">
 			<Button text="PUBLIC ROOM" className="lobby__button" onClick={() => onPublicRoom()} />
@@ -20,5 +20,3 @@ const Lobby: FC<LobbyInterface> = ({ onPublicRoom, onPrivateRoom, onLobby } = { 
 		</div>
 	</Background>
 );
-
-export default Lobby;

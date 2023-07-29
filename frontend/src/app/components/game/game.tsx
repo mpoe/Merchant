@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Room } from '../../constants/types';
 
-import Background from '../background';
+import { Background } from '../background';
 
 interface GameInterface {
     room?: Room;

@@ -10,9 +10,7 @@ interface CustomButtonInterface {
 }
 
 const CustomButton: FC<CustomButtonInterface> = ({ onClick, text, className }) => (
-	<div>
-		<button type="button" className={classnames(className)} onClick={(e) => onClick(e)}>{text}</button>
-	</div>
+	<button type="button" className={classnames(className)} onClick={(e) => onClick(e)}>{text}</button>
 );
 
 export default CustomButton;

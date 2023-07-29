@@ -4,7 +4,6 @@ import PlayingField from './playing-field';
 
 import './draft.scss';
 import Card from './playing-card';
-import Background from '../background';
 
 interface DraftInterface {
 	room?: Room;

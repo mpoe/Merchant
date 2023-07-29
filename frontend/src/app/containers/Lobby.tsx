@@ -3,7 +3,7 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
-import Lobby from '../components/lobby/lobby';
+import { Lobby } from '../components/lobby';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 

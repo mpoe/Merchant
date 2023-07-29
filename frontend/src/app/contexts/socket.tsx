@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, FC } from 'react';
+import React, { createContext, useState, FC } from 'react';
 import openSocket from 'socket.io-client';
 
 const SocketContext = createContext(null);

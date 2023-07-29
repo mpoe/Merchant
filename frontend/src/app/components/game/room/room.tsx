@@ -2,13 +2,12 @@ import React, { FC } from 'react';
 
 import bg from 'assets/bg-lobby.png';
 
-import Background from '../../background';
+import { Background } from '../../background';
 import Header from '../../lobby/lobby-header';
-import LobbyLayout from '../../lobby/lobby-layout';
+import LobbyLayout from '../../lobby/wrapper';
 import { Room } from '../../../constants/types';
 
 import './room.scss';
-import LobbyGoToButton from '../../../containers/Lobby-goto-button';
 import Button from '../../interactions/button';
 
 interface RoomInterface {
@@ -25,7 +24,7 @@ const Room: FC<RoomInterface> = ({ room, startGame, isHost }) => {
 	return (
 		<Background src={bg}>
 			<LobbyLayout>
-				<LobbyGoToButton />
+				{/* <LobbyGoToButton /> */}
 				<Header title={room.name} />
 				<div className="room__info">
 					<span>{`${room.users.length} player(s) waiting`}</span>

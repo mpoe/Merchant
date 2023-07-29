@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import bg from 'assets/bg-lobby.png';
 
-import Background from '../../../background';
+import { Background } from '../../../background';
 import LobbyHeader from '../../../lobby/lobby-header';
-import LobbyLayout from '../../../lobby/lobby-layout';
+import LobbyLayout from '../../../lobby/wrapper';
 import Input from '../../../interactions/input';
-import CreateRoomActions from './room-create-actions';
+import CreateRoomActions from './actions';
 
 import './room-create.scss';
-import LobbyGoToButton from '../../../../containers/Lobby-goto-button';
+import CustomButton from '../../../interactions/button';
 
 interface RoomCreateInterFace {
 	roomName: string;
@@ -18,6 +18,7 @@ interface RoomCreateInterFace {
 	handlePassword: Function;
 	handleCancel: Function;
 	handleCreate: Function;
+	handleBack: Function;
 }
 
 const RoomCreate: FC<RoomCreateInterFace> = ({
@@ -27,10 +28,11 @@ const RoomCreate: FC<RoomCreateInterFace> = ({
 	handlePassword,
 	handleCancel,
 	handleCreate,
+	handleBack,
 }) => (
 	<Background src={bg}>
 		<LobbyLayout>
-			<LobbyGoToButton />
+			<CustomButton text={`${'< Back to lobby'}`} onClick={handleBack} />
 			<LobbyHeader title="create room" />
 			<div className="room-create__container">
 				<Input

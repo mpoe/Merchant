@@ -1,15 +1,15 @@
 .lobby-layout {
 	&__wrapper {
-		display: flex;
-		justify-content: center;
+		align-items: center;
 		height: 100%;
 	}
+
 	&__outer {
 		border-left: 2px solid goldenrod;
 		border-right: 2px solid goldenrod;
 		max-width: 60%;
+		width: 100%;
 		height: 100%;
-		flex: 1;
 	}
 
 	&__inner {

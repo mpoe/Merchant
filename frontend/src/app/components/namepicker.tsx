@@ -4,7 +4,7 @@ import './namepicker.scss';
 
 import Input from './interactions/input';
 import Button from './interactions/button';
-import Background from './background';
+import { Background } from './background';
 
 interface NamePickerProps {
 	submit: Function;
@@ -14,8 +14,8 @@ interface NamePickerProps {
 
 const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit }) => (
 	<Background>
-		<div className="namepicker" >
-			<h1 className="namepicker__title" > Merchant </h1>
+		<div className="namepicker">
+			<h1 className="namepicker__title">Merchant</h1>
 			<Input
 				value={username}
 				name="username"

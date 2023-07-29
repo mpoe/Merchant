@@ -2,14 +2,13 @@ import React, { FC } from 'react';
 
 import bg from 'assets/bg-lobby.png';
 
-import Background from '../../background';
+import { Background } from '../../background';
 import LobbyHeader from '../../lobby/lobby-header';
-import LobbyLayout from '../../lobby/lobby-layout';
+import LobbyLayout from '../../lobby/wrapper';
 import Input from '../../interactions/input';
 import CreateRoomActions from './room-create-actions';
 
 import './room-create.scss';
-import LobbyGoToButton from '../../../containers/Lobby-goto-button';
 
 interface RoomCreateInterFace {
 	roomName: string;
@@ -30,7 +29,7 @@ const RoomCreate: FC<RoomCreateInterFace> = ({
 }) => (
 	<Background src={bg}>
 		<LobbyLayout>
-			<LobbyGoToButton />
+			{/* <LobbyGoToButton /> */}
 			<LobbyHeader title="create room" />
 			<div className="room-create__container">
 				<Input

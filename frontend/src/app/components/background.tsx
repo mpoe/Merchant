@@ -10,7 +10,7 @@ interface BackGroundInterface {
 	className?: string;
 }
 
-const Background: FC<BackGroundInterface> = ({ src, children, className }) => {
+export const Background: FC<BackGroundInterface> = ({ src, children, className }) => {
 	return (
 		<div className={classnames("background", className)} style={{ backgroundImage: `url(${src})` }}>
 			{children}
@@ -21,5 +21,3 @@ const Background: FC<BackGroundInterface> = ({ src, children, className }) => {
 Background.defaultProps = {
 	src: bg,
 }
-
-export default Background;

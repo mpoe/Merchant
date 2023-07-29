@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import RoomCreate from '../components/game/room/create/room-create';
+import RoomCreate from '../components/game/room/create';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
@@ -25,6 +25,10 @@ const RoomCreateContainer = () => {
 	}
 
 	const $onCancel = () => {
+		$goToBrowse();
+	}
+
+	const $goToBrowse = () => {
 		nav('/lobby/browse');
 	}
 
@@ -48,6 +52,7 @@ const RoomCreateContainer = () => {
 			handleRoomName={$onChangeRoomName}
 			handleCreate={$onCreateRoom}
 			handleCancel={$onCancel}
+			handleBack={$goToBrowse}
 		/>
 	);
 }
