@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { SocketProvider } from './contexts/socket';
 
-import Router from './routes';
-import Debug from './containers/debug';
+import { Router } from './routes';
+import { DebugContainer } from './containers/debug';
 
 import './main.css';
-import DraftContainer from './containers/Draft';
+import { DraftContainer } from './containers/Draft';
 
 const container = document.getElementById('app');
 
@@ -16,6 +16,6 @@ root.render(<BrowserRouter>
 	<SocketProvider>
 		<Router />
 		{/* <DraftContainer />
-		<Debug /> */}
+		<DebugContainer /> */}
 	</SocketProvider>
 </BrowserRouter>)

@@ -1,8 +1,6 @@
 import React from "react";
 import './player.scss';
 
-const Player = () => {
+export const Player = () => {
     return <div className="player__container">Aaaa</div>
 }
-
-export default Player;

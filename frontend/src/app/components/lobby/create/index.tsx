@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import bg from 'assets/bg-lobby.png';
 
-import { Background } from '../../../background';
-import LobbyHeader from '../../../lobby/lobby-header';
-import LobbyLayout from '../../../lobby/wrapper';
-import Input from '../../../interactions/input';
-import CreateRoomActions from './actions';
+import { Background } from '../../background';
+import { LobbyHeader } from '../header';
+import { LobbyLayout } from '../layout';
+import { Input } from '../../interactions/input';
+import { CreateRoomActions } from './actions';
 
 import './room-create.scss';
-import CustomButton from '../../../interactions/button';
+import { Button, ButtonStyle } from '../../interactions/button';
 
 interface RoomCreateInterFace {
 	roomName: string;
@@ -21,7 +21,7 @@ interface RoomCreateInterFace {
 	handleBack: Function;
 }
 
-const RoomCreate: FC<RoomCreateInterFace> = ({
+export const RoomCreate: FC<RoomCreateInterFace> = ({
 	roomName,
 	handleRoomName,
 	password,
@@ -32,7 +32,7 @@ const RoomCreate: FC<RoomCreateInterFace> = ({
 }) => (
 	<Background src={bg}>
 		<LobbyLayout>
-			<CustomButton text={`${'< Back to lobby'}`} onClick={handleBack} />
+			<Button style={ButtonStyle.BORDER} text={`${'< Back to lobby'}`} onClick={handleBack} className="room-create__back-button" />
 			<LobbyHeader title="create room" />
 			<div className="room-create__container">
 				<Input
@@ -60,5 +60,3 @@ const RoomCreate: FC<RoomCreateInterFace> = ({
 		</LobbyLayout>
 	</Background>
 );
-
-export default RoomCreate;

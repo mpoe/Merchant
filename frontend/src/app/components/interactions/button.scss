@@ -12,18 +12,27 @@ button {
     &:focus {
         outline: none;
     }
+
     &:hover {
         cursor: pointer;
         opacity: 0.5;
-	}
+    }
 }
 
 .button {
-	&--colored {
-		color: goldenrod;
-	}
+    &--colored {
+        color: goldenrod;
+    }
 
-	&--small {
-		font-size: 2em;
-	}
+    &--small {
+        font-size: 2em;
+    }
+
+    &--border {
+        border: 1px solid goldenrod;
+        border-radius: 15px;
+        line-height: 56px;
+        padding-top: 3px;
+        padding-bottom: 5px;
+    }
 }

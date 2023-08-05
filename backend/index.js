@@ -76,7 +76,7 @@ io.on('connection', (client) => { // client === socket
 		client.emit('YOU_ARE', getUser(client.id))
 	})
 
-	client.on('CREATE_ROOM', ({ roomSettings } = {}) => {
+	client.on('CREATE_ROOM', (roomSettings = null) => {
 		roomId++;
 		if (!getUser(client.id)) {
 			createGuestUser(client.id);

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Background } from '../components/background';
-import Game from '../components/game/game';
+import { Game } from '../components/game';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-const GameContainer = () => {
+export const GameContainer = () => {
     const socket = useSocket();
     const [room, setRoom] = useState(null);
 
@@ -14,7 +14,7 @@ const GameContainer = () => {
                 setRoom(room);
             });
             return () => {
-                socket.removeAllListers();
+                socket.removeAllListeners();
             }
         }
     }, [socket])
@@ -27,5 +27,3 @@ const GameContainer = () => {
         </Background>
     )
 }
-
-export default GameContainer;

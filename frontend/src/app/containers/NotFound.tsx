@@ -1,11 +1,9 @@
 import React from 'react';
 
-import NotFound from '../components/404';
+import { NotFound } from '../components/404';
 
-const NotFoundContainer = () => {
+export const NotFoundContainer = () => {
 	return (
 		<NotFound />
 	);
 }
-
-export default NotFoundContainer;

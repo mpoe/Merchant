@@ -7,7 +7,7 @@ interface GameInterface {
     room?: Room;
 }
 
-const Game: FC<GameInterface> = ({ room }) => {
+export const Game: FC<GameInterface> = ({ room }) => {
     return (
         <Background>
             <div style={{ width: '1000px' }}></div>
@@ -15,5 +15,3 @@ const Game: FC<GameInterface> = ({ room }) => {
         </Background>
     );
 }
-
-export default Game;

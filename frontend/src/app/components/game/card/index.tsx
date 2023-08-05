@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Card as CardType } from '../../constants/types';
+import { Card as CardType } from '../../../constants/types';
 
 import cardFront from '../../../../assets/card-front.svg';
 import cardBack from '../../../../assets/card-back.png';
@@ -12,12 +12,10 @@ interface CardInterface {
     onClick(id: number): any;
 }
 
-const Card: FC<CardInterface> = ({ card, onClick }) => {
+export const Card: FC<CardInterface> = ({ card, onClick }) => {
     return (
         <div onClick={() => onClick(card.id)} className="card" style={{ backgroundImage: `url(${cardFront})` }}>
             <p className="card__title">{card.name}</p>
         </div>
     );
 }
-
-export default Card;

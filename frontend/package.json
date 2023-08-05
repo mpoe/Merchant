@@ -7,7 +7,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --env ENVIRONMENT=develop",
-    "start:dev": "webpack && webpack-dev-server --env ENVIRONMENT=develop",
+    "start:dev": "webpack-dev-server --env ENVIRONMENT=develop",
     "start": "npm run build && node dist/server.js"
   },
   "author": "mpoe",
@@ -56,6 +56,6 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.10.0"
+    "webpack-dev-server": "^4.15.1"
   }
 }

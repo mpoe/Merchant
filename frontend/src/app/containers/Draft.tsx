@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Draft from '../components/game/draft';
+import { Draft } from '../components/game/draft';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-const DraftContainer = () => {
+export const DraftContainer = () => {
     const socket = useSocket();
     const [room, setRoom] = useState(null);
 
@@ -16,7 +16,7 @@ const DraftContainer = () => {
                 setRoom(room);
             })
             return () => {
-                socket.removeAllListers();
+                socket.removeAllListeners();
             }
         }
     }, [socket])
@@ -29,5 +29,3 @@ const DraftContainer = () => {
         <Draft room={room} onClickCard={$onClickCard} />
     )
 }
-
-export default DraftContainer;

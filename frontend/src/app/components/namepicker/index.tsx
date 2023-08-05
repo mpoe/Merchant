@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 
 import './namepicker.scss';
 
-import Input from './interactions/input';
-import Button from './interactions/button';
-import { Background } from './background';
+import { Input } from '../interactions/input';
+import { Button } from '../interactions/button';
+import { Background } from '../background';
 
 interface NamePickerProps {
 	submit: Function;
@@ -12,7 +12,7 @@ interface NamePickerProps {
 	username: string;
 }
 
-const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit }) => (
+export const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit }) => (
 	<Background>
 		<div className="namepicker">
 			<h1 className="namepicker__title">Merchant</h1>
@@ -29,5 +29,3 @@ const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit }) => (
 		</div>
 	</Background>
 );
-
-export default NamePicker;

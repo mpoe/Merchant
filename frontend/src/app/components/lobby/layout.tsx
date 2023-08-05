@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
-import './wrapper.scss';
+import './layout.scss';
 
-interface LobbyWrapperInterface {
+interface LobbyLayoutInterface {
 	children: React.ReactNode;
 }
 
-const LobbyWrapper: FC<LobbyWrapperInterface> = ({ children }) => {
+export const LobbyLayout: FC<LobbyLayoutInterface> = ({ children }) => {
 	return (
 		<div className="lobby-layout__wrapper">
 			<div className="lobby-layout__outer">
@@ -17,5 +17,3 @@ const LobbyWrapper: FC<LobbyWrapperInterface> = ({ children }) => {
 		</div>
 	);
 };
-
-export default LobbyWrapper;

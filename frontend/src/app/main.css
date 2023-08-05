@@ -61,6 +61,7 @@ a {
 	justify-content: space-between;
 	border-top: 2px solid goldenrod;
 	padding-bottom: 40px;
+	flex-direction: row;
 }
 
 .bottom-action {

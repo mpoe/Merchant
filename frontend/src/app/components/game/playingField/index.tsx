@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import { Background } from '../background';
+import { Background } from '../../background';
 import playmat from '../../../../assets/bg-playmat.svg';
 import gamemat from '../../../../assets/bg-game.svg';
 
 import './playing-field.scss';
-import { User, Room } from '../../constants/types';
-import PlayerContainer from '../../containers/Player';
+import { User, Room } from '../../../constants/types';
+// import { PlayerContainer } from '../../../containers/Player';
 
 interface PlayingFieldInterface {
     children: React.ReactNode;
@@ -15,7 +15,7 @@ interface PlayingFieldInterface {
 }
 
 
-const PlayingField: FC<PlayingFieldInterface> = ({ children, users, room }) => {
+export const PlayingField: FC<PlayingFieldInterface> = ({ children, users, room }) => {
     console.log('users', users);
     console.log('room', room);
     return (
@@ -30,5 +30,3 @@ const PlayingField: FC<PlayingFieldInterface> = ({ children, users, room }) => {
         </Background>
     );
 };
-
-export default PlayingField;

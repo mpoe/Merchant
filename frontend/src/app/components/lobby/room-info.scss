@@ -1,12 +1,17 @@
 .room-info {
 	display: flex;
 	justify-content: space-between;
-	background-color: rgba(32, 24, 19, 0.3);
+	padding: .5rem; // should be a variable, since it will be used many places probably..
+	background-color: rgba(32, 24, 19, 0.4);
 	margin: 10px;
+	transition: background-color .2s;
 
-	&__public {
-		display: flex;
-		flex-direction: column;
+	& * {
+		pointer-events: none;
+	}
+
+	&:hover {
+		background-color: rgba(32, 24, 19, 0.6);
 	}
 }
 
@@ -23,9 +28,7 @@
 }
 
 .room-password {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	margin-left: 0.5rem;
 }
 
 .host-name {

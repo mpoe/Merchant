@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import './input.scss';
 
-interface CustomInputInterface {
+interface InputInterface {
 	value: string;
 	name: string;
 	onChange: Function;
@@ -14,7 +14,7 @@ interface CustomInputInterface {
 	labelText?: string;
 }
 
-const CustomInput: FC<CustomInputInterface> = ({
+export const Input: FC<InputInterface> = ({
 	value, name, onChange, placeholder = 'placeholder', className = null, containerClass = null, labelClass = null, labelText = null,
 }) => (
 	<div className={classnames(containerClass)}>
@@ -24,5 +24,3 @@ const CustomInput: FC<CustomInputInterface> = ({
 		</label>
 	</div>
 );
-
-export default CustomInput;

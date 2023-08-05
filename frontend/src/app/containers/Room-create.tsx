@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import RoomCreate from '../components/game/room/create';
+import { RoomCreate } from '../components/lobby/create';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-const RoomCreateContainer = () => {
+export const RoomCreateContainer = () => {
 	const [password, setPassword] = useState('');
 	const [roomName, setRoomName] = useState('');
 	const socket = useSocket();
@@ -56,5 +56,3 @@ const RoomCreateContainer = () => {
 		/>
 	);
 }
-
-export default RoomCreateContainer;

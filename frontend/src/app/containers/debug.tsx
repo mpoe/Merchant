@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import CustomButton from '../components/interactions/button';
+import { Button } from '../components/interactions/button';
 import { Card, Customer, Room, User } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-const DebugContainer = () => {
+export const DebugContainer = () => {
     const socket = useSocket();
     const [serverState, setServerState] = useState(null);
     useEffect(() => {
@@ -12,7 +12,7 @@ const DebugContainer = () => {
                 setServerState(data);
             });
             return () => {
-                socket.removeAllListers();
+                socket.removeAllListeners();
             }
         }
     }, [socket]);
@@ -63,11 +63,9 @@ const DebugContainer = () => {
                             </div>
                         )
                     })}
-                    <CustomButton onClick={$seedDraft} text="seed" />
+                    <Button onClick={$seedDraft} text="seed" />
                 </>
             </div>
         </>
     )
 }
-
-export default DebugContainer;

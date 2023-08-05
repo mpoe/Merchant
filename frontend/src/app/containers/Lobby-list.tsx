@@ -3,11 +3,11 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
-import LobbyList from '../components/lobby/lobby-list';
+import { LobbyList } from '../components/lobby/list';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-const LobbyListContainer = () => {
+export const LobbyListContainer = () => {
 	const nav = useNavigate();
 	const socket = useSocket();
 	const [rooms, setRooms] = useState({});
@@ -74,5 +74,3 @@ const LobbyListContainer = () => {
 		/>
 	);
 }
-
-export default LobbyListContainer;

@@ -3,20 +3,21 @@ import React, { FC } from 'react';
 import bg from 'assets/bg-lobby.png';
 
 import { Background } from '../../background';
-import Header from '../../lobby/lobby-header';
-import LobbyLayout from '../../lobby/wrapper';
-import { Room } from '../../../constants/types';
+import { LobbyHeader } from '../header';
+import { LobbyLayout } from '../layout';
+import { Room as RoomType } from '../../../constants/types';
 
 import './room.scss';
-import Button from '../../interactions/button';
+import { Button, ButtonStyle } from '../../interactions/button';
 
 interface RoomInterface {
-	room?: Room;
+	room?: RoomType;
 	startGame: Function;
+	goToBrowse: Function;
 	isHost: Boolean;
 }
 
-const Room: FC<RoomInterface> = ({ room, startGame, isHost }) => {
+export const Room: FC<RoomInterface> = ({ room, startGame, isHost, goToBrowse }) => {
 	if (!room) {
 		return null;
 	}
@@ -24,8 +25,8 @@ const Room: FC<RoomInterface> = ({ room, startGame, isHost }) => {
 	return (
 		<Background src={bg}>
 			<LobbyLayout>
-				{/* <LobbyGoToButton /> */}
-				<Header title={room.name} />
+				<Button style={ButtonStyle.BORDER} onClick={goToBrowse} text="Leave room" className='room__back-button' />
+				<LobbyHeader title={room.name} />
 				<div className="room__info">
 					<span>{`${room.users.length} player(s) waiting`}</span>
 					<span>{`${host.username} is the host`}</span>
@@ -44,5 +45,3 @@ const Room: FC<RoomInterface> = ({ room, startGame, isHost }) => {
 		</Background>
 	);
 };
-
-export default Room;

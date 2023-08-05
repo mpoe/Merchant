@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 
-import bg from '../../../assets/bg-frontpage.png';
+import bg from '../../../../assets/bg-frontpage.png';
 import './background.scss';
 
 interface BackGroundInterface {

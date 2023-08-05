@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import Room from '../components/game/room/room';
-import Game from '../components/game/game';
+import { Room } from '../components/lobby/room';
+import { Game } from '../components/game';
 import { Room as RoomType, User as UserType } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 import { PLAYER, OBSERVER, LOBBY_PHASE, DRAFT_PHASE, GAME_PHASE, SCORE_PHASE } from '../constants/backend';
 
-const RoomContainer = () => {
+export const RoomContainer = () => {
 	const params = useParams();
 	const { roomId } = params;
 	const socket = useSocket();
 	const [room, setRoom] = useState(null);
 	const [playerId, setPlayerId] = useState(null); // "you"
+	const nav = useNavigate();
 
 	useEffect(() => {
 		if (socket) {
@@ -31,7 +32,7 @@ const RoomContainer = () => {
 				setRoom(roomData);
 			});
 			return () => {
-				socket.removeAllListers();
+				socket.removeAllListeners();
 				socket.emit('LEAVE_ROOM', roomId);
 			}
 		}
@@ -45,6 +46,10 @@ const RoomContainer = () => {
 		socket.emit('START_GAME', roomId)
 	}
 
+	const $goToBrowse = () => {
+		nav('/lobby/browse');
+	}
+
 
 	if (!room) {
 		return null;
@@ -56,6 +61,7 @@ const RoomContainer = () => {
 				room={room}
 				startGame={$startGame}
 				isHost={playerId === room?.host.id}
+				goToBrowse={$goToBrowse}
 			/>
 		);
 	}
@@ -69,5 +75,3 @@ const RoomContainer = () => {
 	}
 
 }
-
-export default RoomContainer;

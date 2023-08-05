@@ -7,9 +7,7 @@ import { Lobby } from '../components/lobby';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-
-
-const LobbyContainer = () => {
+export const LobbyContainer = () => {
 	const nav = useNavigate();
 	const socket = useSocket();
 
@@ -45,5 +43,3 @@ const LobbyContainer = () => {
 		/>
 	);
 }
-
-export default LobbyContainer;

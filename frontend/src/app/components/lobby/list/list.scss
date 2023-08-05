@@ -1,0 +1,19 @@
+.lobby-content {
+	display: grid;
+	grid-template-rows: 0fr;
+	grid-template-columns: 1fr 1fr;
+	width: 80%;
+	flex: 1;
+	max-height: 100%;
+	overflow-y: auto;
+	padding-top: 10px;
+	margin-bottom: 10px;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	@media (max-width: 1280px) {
+		grid-template-columns: 1fr;
+	}
+}

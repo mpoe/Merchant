@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import NamePicker from '../components/namepicker';
+import { NamePicker } from '../components/namepicker';
 import { useSocket } from '../hooks/socket';
 
-const NamePickerContainer = () => {
+export const NamePickerContainer = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState('mpoe')
 	const socket = useSocket();
@@ -33,5 +33,3 @@ const NamePickerContainer = () => {
 		/>
 	);
 }
-
-export default NamePickerContainer;
