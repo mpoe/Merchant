@@ -5,9 +5,7 @@ const dbcon = mysql.createConnection({
   password: ""
 });
 
-dbcon.test = () => {
-  console.log('test');
-}
+// dbcon.test = () => {}
 
 
 module.exports = dbcon;

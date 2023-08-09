@@ -1,23 +1,20 @@
 import React, { FC } from 'react'
 
-import { Background } from '../../background';
+import { Background } from '../background';
 import playmat from '../../../../assets/bg-playmat.svg';
 import gamemat from '../../../../assets/bg-game.svg';
 
-import './playing-field.scss';
-import { User, Room } from '../../../constants/types';
-// import { PlayerContainer } from '../../../containers/Player';
+import './field.scss';
+import { User, Room } from '../../constants/types';
 
-interface PlayingFieldInterface {
+interface DraftFieldInterface {
     children: React.ReactNode;
     users: Array<User>;
     room: Room;
 }
 
 
-export const PlayingField: FC<PlayingFieldInterface> = ({ children, users, room }) => {
-    console.log('users', users);
-    console.log('room', room);
+export const DraftField: FC<DraftFieldInterface> = ({ children, users, room }) => {
     return (
         <Background src={gamemat} className="playing-field__mat">
             <div className='playing-field'>

@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Room } from '../components/lobby/room';
-import { Game } from '../components/game';
-import { Room as RoomType, User as UserType } from '../constants/types';
+import { Room as RoomType, User as UserType, GamePhase } from '../constants/types';
 import { useSocket } from '../hooks/socket';
-import { PLAYER, OBSERVER, LOBBY_PHASE, DRAFT_PHASE, GAME_PHASE, SCORE_PHASE } from '../constants/backend';
+import { MerchantContainer } from './Merchant';
 
 export const RoomContainer = () => {
 	const params = useParams();
@@ -55,7 +54,7 @@ export const RoomContainer = () => {
 		return null;
 	}
 
-	if (room.state.phase === LOBBY_PHASE) {
+	if (room.state.phase === GamePhase.LOBBY_PHASE) {
 		return (
 			<Room
 				room={room}
@@ -66,11 +65,9 @@ export const RoomContainer = () => {
 		);
 	}
 
-	if (room.state.phase === DRAFT_PHASE) {
+	if (room.state.phase !== GamePhase.LOBBY_PHASE) {
 		return (
-			<Game
-				room={room}
-			/>
+			<MerchantContainer roomData={room} />
 		)
 	}
 

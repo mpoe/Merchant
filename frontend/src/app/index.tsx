@@ -7,15 +7,15 @@ import { Router } from './routes';
 import { DebugContainer } from './containers/debug';
 
 import './main.css';
-import { DraftContainer } from './containers/Draft';
+import { MerchantContainer } from './containers/Merchant';
 
 const container = document.getElementById('app');
 
 const root = createRoot(container);
 root.render(<BrowserRouter>
 	<SocketProvider>
-		<Router />
-		{/* <DraftContainer />
-		<DebugContainer /> */}
+		{/* <Router /> */}
+		<MerchantContainer roomData={null} />
+		<DebugContainer />
 	</SocketProvider>
 </BrowserRouter>)

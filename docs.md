@@ -1,7 +1,6 @@
 - [Frontend](#frontend)
 - [Backend](#backend)
   - [Api](#api)
-    - [GET\_ID\_REQ](#get_id_req)
     - [SET\_USERNAME\_REQ](#set_username_req)
     - [WHO\_AM\_I](#who_am_i)
     - [CREATE\_ROOM](#create_room)
@@ -20,13 +19,6 @@
 # Backend
 
 ## Api
-
-### GET_ID_REQ
-
-```
-() => event
-Emits the "GET_ID_RES" event, returns the client ID
-```
 
 ### SET_USERNAME_REQ
 

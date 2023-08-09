@@ -1,0 +1,21 @@
+.scoreboard {
+    background-color: #b8eeb9;
+    position: absolute;
+    width: 400px;
+    height: 255px;
+    left: calc(50% - 200px);
+    z-index: 2;
+    top: 5%;
+
+    &__list-item {
+        padding: 1em 2em;
+        flex-direction: row;
+        justify-content: space-between;
+        font-weight: bold;
+
+        &__score {
+            text-align: end;
+            line-height: 1.2em;
+        }
+    }
+}

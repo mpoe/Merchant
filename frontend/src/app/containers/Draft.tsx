@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Draft } from '../components/game/draft';
+import React, { FC } from 'react';
+import { Draft } from '../components/draft';
 import { Room } from '../constants/types';
 import { useSocket } from '../hooks/socket';
 
-export const DraftContainer = () => {
-    const socket = useSocket();
-    const [room, setRoom] = useState(null);
+interface DraftContainerInterface {
+    room: Room
+    userId: string
+    isActivePlayer: boolean
+}
 
-    useEffect(() => {
-        if (socket) {
-            socket.on('DRAFT_SEEDED', (room: Room) => {
-                setRoom(room);
-            });
-            socket.on('CARD_DRAFTED', (room: Room) => {
-                setRoom(room);
-            })
-            return () => {
-                socket.removeAllListeners();
-            }
-        }
-    }, [socket])
+export const DraftContainer: FC<DraftContainerInterface> = ({ room, userId, isActivePlayer }) => {
+    const socket = useSocket();
 
     const $onClickCard = (id: number) => {
-        socket.emit('DRAFT_CARD', { id, roomId: room.id })
+        socket.emit('DRAFT_CARD', { cardId: id, roomId: room.id, userId })
     }
 
-    return room && (
-        <Draft room={room} onClickCard={$onClickCard} />
-    )
+    return <Draft room={room} isActivePlayer={isActivePlayer} onClickCard={$onClickCard} />
 }

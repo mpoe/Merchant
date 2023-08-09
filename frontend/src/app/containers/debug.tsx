@@ -6,6 +6,7 @@ import { useSocket } from '../hooks/socket';
 export const DebugContainer = () => {
     const socket = useSocket();
     const [serverState, setServerState] = useState(null);
+    const [display, setDisplay] = useState('flex');
     useEffect(() => {
         if (socket) {
             socket.on('GAME_STATE', (data: any) => {
@@ -25,11 +26,16 @@ export const DebugContainer = () => {
         socket.emit('SEED_DRAFT');
     }
 
-    console.log('serverState', serverState);
+    const $toggleDisplay = () => {
+        if (display === 'flex') {
+            return setDisplay('none')
+        }
+        setDisplay('flex');
+    }
 
     return (
         <>
-            <div style={{ width: '20%', backgroundColor: 'bisque', display: 'flex', flexDirection: 'column', position: 'absolute', right: '2%' }}>
+            <div style={{ zIndex: 1111, width: '400px', backgroundColor: 'bisque', display: `${display}`, flexDirection: 'column', position: 'absolute', right: '2%' }}>
                 <>
                     Server state:
 
@@ -64,6 +70,7 @@ export const DebugContainer = () => {
                         )
                     })}
                     <Button onClick={$seedDraft} text="seed" />
+                    <Button onClick={$toggleDisplay} text="hide" />
                 </>
             </div>
         </>

@@ -4,6 +4,8 @@
     align-items: center;
     width: 60%;
     height: 90%;
+    position: relative;
+    z-index: 1;
 
     &__mat {
         height: auto;

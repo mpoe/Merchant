@@ -4,6 +4,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const path = require('path')
+const getRandomNumber = require('./util');
 
 const data = require('./data.json');
 
@@ -19,8 +20,6 @@ const io = new Server(server, {
 const port = process.env.PORT;
 
 // const dbcon = require('./db'); // connection to the database
-
-const debug = true;
 
 // update frontend constants if adding here.
 const PLAYER = 'player';
@@ -60,10 +59,6 @@ const LOBBY_STATE = {
 
 
 io.on('connection', (client) => { // client === socket
-	client.on('GET_ID_REQ', () => {
-		client.emit('GET_ID_RES', client.id);
-	})
-
 	client.on('SET_USERNAME_REQ', (username) => {
 		users[client.id] = {
 			...users[client.id],
@@ -152,23 +147,51 @@ io.on('connection', (client) => { // client === socket
 		}
 		io.to(`room-${roomId}`).emit('GAME_STARTED', rooms[`room-${roomId}`]);
 	})
+	function draftCard({ cardId, roomId, userId }) {
+		const room = rooms[`room-${roomId}`];
+		let nextActivePlayerIndex = rooms[`room-${roomId}`].state.players.findIndex((player) => player.id === room.state.activePlayer.id) + 1;
 
-	client.on('DRAFT_CARD', ({ id, roomId }) => {
-		console.log('roomId', roomId);
-		console.log('id', id);
+		if (nextActivePlayerIndex > room.state.players.length - 1) {
+			nextActivePlayerIndex = 0;
+		}
+		const activePlayer = room.state.players[nextActivePlayerIndex];
+		const draftedCard = room.state.draftpool.find((card) => card.id === cardId);
+		const newDraftPool = room.state.draftpool.filter((card) => card.id !== cardId);
 		rooms = {
 			...rooms,
 			[`room-${roomId}`]: {
-				...rooms[`room-${roomId}`],
+				...room,
 				state: {
-					...rooms[`room-${roomId}`].state,
-					draftpool: rooms[`room-${roomId}`].state.draftpool.filter((card) => card.id !== id)
+					...room.state,
+					draftpool: newDraftPool,
+					players: room.state.players.map((user) => {
+						if (user.id === userId) {
+							return {
+								...user,
+								deck: [...user.deck, ...Array(draftedCard.amount).fill(draftedCard)]
+							}
+						}
+						return user;
+					}),
+					activePlayer,
+					...(newDraftPool.length === 0 && { phase: GAME_PHASE })
 				},
 			},
 		}
 		client.emit('CARD_DRAFTED', rooms[`room-${roomId}`])
 		io.to(`room-${roomId}`).emit('CARD_DRAFTED', rooms[`room-${roomId}`]);
 		io.emit('GAME_STATE', { rooms, users })
+
+		if (activePlayer.status === 'bot' && newDraftPool.length !== 0) {
+			setTimeout(() => {
+				draftCard({ cardId: newDraftPool[getRandomNumber(newDraftPool.length - 1)].id, roomId, userId: activePlayer.id }); // calls this function again if
+			}, 111)
+		}
+	}
+	client.on('DRAFT_CARD', draftCard)
+
+	client.on('GET_ROOM_INFO', (roomId) => {
+		client.emit('ROOM_INFO', rooms[`room-${roomId}`])
 	})
 
 	function getUser(clientId) {
@@ -221,6 +244,8 @@ io.on('connection', (client) => { // client === socket
 			username: 'mpoe_test',
 			id: client.id,
 		};
+		const players = [botUser1, getPlayerUser(client.id)]
+		const startingPlayer = players[getRandomNumber(players.length)];
 		rooms = {
 			...rooms,
 			[`room-1`]: {
@@ -235,41 +260,46 @@ io.on('connection', (client) => { // client === socket
 					cardpool: cards,
 					draftpool: cards,
 					customers: customers,
-					players: [botUser1, getPlayerUser(client.id)],
+					players,
+					activePlayer: startingPlayer,
 				}
 			},
 		};
 		client.emit('DRAFT_SEEDED', rooms[`room-1`])
 		io.emit('GAME_STATE', { rooms, users })
-
+		if (startingPlayer.id === botUser1.id) {
+			setTimeout(() => {
+				draftCard({ cardId: cards[getRandomNumber(cards.length - 1)].id, roomId: rooms["room-1"].id, userId: botUser1.id })
+			}, 111)
+		}
 	})
 
-	client.on('SEED_GAME', () => {
-		users[client.id] = {
-			...users[client.id],
-			username: 'mpoe_test',
-			id: client.id,
-		};
-		rooms = {
-			...rooms,
-			[`room-1`]: {
-				password: '',
-				name: `room-1`,
-				id: 1,
-				users: [createSeedBot(), getPlayerUser(client.id)],
-				host: users[client.id],
-				state: {
-					phase: DRAFT_PHASE,
-					round: null, // set after draft
-					cardpool: cards,
-					draftpool: cards,
-					customers: customers,
-				}
-			},
-		};
-		client.emit('GAME_SEEDED', rooms[`room-1`])
-		io.emit('GAME_STATE', { rooms, users })
-	})
+	// client.on('SEED_GAME', () => {
+	// 	users[client.id] = {
+	// 		...users[client.id],
+	// 		username: 'mpoe_test',
+	// 		id: client.id,
+	// 	};
+	// 	rooms = {
+	// 		...rooms,
+	// 		[`room-1`]: {
+	// 			password: '',
+	// 			name: `room-1`,
+	// 			id: 1,
+	// 			users: [createSeedBot(), getPlayerUser(client.id)],
+	// 			host: users[client.id],
+	// 			state: {
+	// 				phase: DRAFT_PHASE,
+	// 				round: null, // set after draft
+	// 				cardpool: cards,
+	// 				draftpool: cards,
+	// 				customers: customers,
+	// 			}
+	// 		},
+	// 	};
+	// 	client.emit('GAME_SEEDED', rooms[`room-1`])
+	// 	io.emit('GAME_STATE', { rooms, users })
+	// })
 });
 
 server.listen(port, function () {

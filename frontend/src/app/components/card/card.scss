@@ -1,0 +1,57 @@
+.card {
+    width: 133px;
+    aspect-ratio: 0.69012485811577752553916004540295;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 11px;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    display: flex;
+    justify-self: center;
+    transition: all .333s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &__title {
+        position: absolute;
+        bottom: 20%;
+        left: 10%;
+        pointer-events: none;
+    }
+
+    &__amount {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 40px;
+        height: 40px;
+        font-weight: bold;
+        font-size: 1.3em;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        background-color: #ebd6af;
+        z-index: -1;
+    }
+
+    &--inactive {
+        filter: brightness(87%);
+    }
+
+    &--small {
+        width: 95px;
+    }
+
+    &--opponent {
+        cursor: default;
+
+        &:hover {
+            filter: brightness(87%);
+            transform: scale(1.05);
+        }
+    }
+}

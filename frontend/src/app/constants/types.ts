@@ -3,13 +3,32 @@ type User = {
 	username: string;
 }
 
+enum GamePhase { // use these values in app
+	LOBBY_PHASE = 'lobby',
+	DRAFT_PHASE = 'draft',
+	GAME_PHASE = 'game',
+	SCORE_PHASE = 'score'
+}
+
+type Player = {
+	id: string;
+	username: string;
+	deck: Array<Card>;
+	hand: Array<Card>;
+	hasPlayedCard: boolean;
+	score?: number;
+	status: 'player' | 'bot';
+}
+
 type RoomState = {
-	phase: String,
+	phase: GamePhase,
 	round: any, // set after draft
 	cardpool: any,
 	playerDecks: any,
 	draftpool: any,
 	customers: Array<any>,
+	activePlayer: User,
+	players: Array<Player>
 }
 
 type Room = {
@@ -39,4 +58,5 @@ export {
 	User,
 	Customer,
 	Card,
+	GamePhase
 }

@@ -1,0 +1,67 @@
+.opponent {
+    background-color: #eee1b8;
+
+    &__card-container {
+        flex-direction: row;
+        padding: 20px 37px 20px 20px;
+    }
+
+    & .card {
+        margin: 0 0 0 -45px;
+    }
+
+    @for $i from 0 through 3 {
+        &-#{$i} {
+            position: absolute;
+            width: 250px;
+            height: 300px;
+            max-width: 250px;
+            max-height: 300px;
+        }
+    }
+
+    &-0 {
+        flex-direction: column-reverse;
+        top: 36%;
+        left: 10%;
+        transform: rotate(90deg);
+
+        & .opponent__card-container {
+            transform: rotate(-20deg);
+        }
+    }
+
+    &-1 {
+        flex-direction: column-reverse;
+        top: 36%;
+        right: 10%;
+        transform: rotate(-90deg);
+
+        & .opponent__card-container {
+            transform: rotate(5deg);
+        }
+    }
+
+    &-2 {
+        top: 5%;
+        left: 10%;
+        transform: rotate(-45deg);
+
+        & .opponent__card-container {
+            transform: rotate(192deg);
+            right: 50px;
+            top: -20px;
+            position: absolute;
+        }
+    }
+
+    &-3 {
+        top: 5%;
+        right: 10%;
+        transform: rotate(45deg);
+
+        & .opponent__card-container {
+            transform: rotate(176deg);
+        }
+    }
+}
