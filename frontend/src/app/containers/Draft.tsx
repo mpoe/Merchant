@@ -10,11 +10,11 @@ interface DraftContainerInterface {
 }
 
 export const DraftContainer: FC<DraftContainerInterface> = ({ room, userId, isActivePlayer }) => {
-    const socket = useSocket();
+	const socket = useSocket();
 
-    const $onClickCard = (id: number) => {
-        socket.emit('DRAFT_CARD', { cardId: id, roomId: room.id, userId })
-    }
+	const $onClickCard = (id: number) => {
+		socket.emit('DRAFT_CARD', { cardId: id, roomId: room.id, userId });
+	};
 
-    return <Draft room={room} isActivePlayer={isActivePlayer} onClickCard={$onClickCard} />
-}
+	return <Draft room={room} isActivePlayer={isActivePlayer} onClickCard={$onClickCard} />;
+};

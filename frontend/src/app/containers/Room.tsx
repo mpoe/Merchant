@@ -20,20 +20,20 @@ export const RoomContainer = () => {
 			socket.emit('WHO_AM_I');
 			socket.on('JOINED_ROOM', (roomData: RoomType) => {
 				setRoom(roomData);
-			})
+			});
 			socket.on('LEFT_ROOM', (roomData: RoomType) => {
 				setRoom(roomData);
-			})
+			});
 			socket.on('YOU_ARE', (user: UserType) => {
 				setPlayerId(user.id);
-			})
+			});
 			socket.on('GAME_STARTED', (roomData: RoomType) => {
 				setRoom(roomData);
 			});
 			return () => {
 				socket.removeAllListeners();
 				socket.emit('LEAVE_ROOM', roomId);
-			}
+			};
 		}
 	}, [socket]);
 
@@ -42,12 +42,12 @@ export const RoomContainer = () => {
 			alert('loner!');
 			return;
 		}
-		socket.emit('START_GAME', roomId)
-	}
+		socket.emit('START_GAME', roomId);
+	};
 
 	const $goToBrowse = () => {
 		nav('/lobby/browse');
-	}
+	};
 
 
 	if (!room) {
@@ -68,7 +68,7 @@ export const RoomContainer = () => {
 	if (room.state.phase !== GamePhase.LOBBY_PHASE) {
 		return (
 			<MerchantContainer roomData={room} />
-		)
+		);
 	}
 
-}
+};

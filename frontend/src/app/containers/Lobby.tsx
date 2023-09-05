@@ -13,27 +13,27 @@ export const LobbyContainer = () => {
 
 	const $onLobby = () => {
 		nav('/lobby/browse');
-	}
+	};
 
 	const $onPublicRoom = () => {
 		socket.emit('CREATE_ROOM');
-	}
+	};
 
 	const $onPrivateRoom = () => {
 		nav('/lobby/create');
-	}
+	};
 
 	useEffect(() => {
 		if (socket) {
 			socket.on('JOINED_ROOM', (room: Room) => {
-				nav(`/room/${room.id}`)
-			})
+				nav(`/room/${room.id}`);
+			});
 
 			return () => {
 				socket.off("JOINED_ROOM");
 			};
 		}
-	}, [socket])
+	}, [socket]);
 
 	return (
 		<Lobby
@@ -42,4 +42,4 @@ export const LobbyContainer = () => {
 			onLobby={$onLobby}
 		/>
 	);
-}
+};

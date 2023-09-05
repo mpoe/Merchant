@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes as Switch } from 'react-router-dom';
-
 import { NamePickerContainer } from '../containers/Namepicker';
 import { NotFoundContainer } from '../containers/NotFound';
 import { LobbyContainer } from '../containers/Lobby';

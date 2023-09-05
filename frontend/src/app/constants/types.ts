@@ -28,7 +28,8 @@ type RoomState = {
 	draftpool: any,
 	customers: Array<any>,
 	activePlayer: User,
-	players: Array<Player>
+	players: Array<Player>,
+	playedCards: Array<Card>,
 }
 
 type Room = {
@@ -50,7 +51,9 @@ type Card = {
 	name: string,
 	amount: number,
 	cost: number,
+	budget: number,
 	id: number,
+	playedBy: string,
 }
 
 export {
@@ -58,5 +61,6 @@ export {
 	User,
 	Customer,
 	Card,
-	GamePhase
-}
+	GamePhase,
+	Player,
+};

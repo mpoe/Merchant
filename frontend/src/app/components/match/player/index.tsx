@@ -1,36 +1,38 @@
-import React from "react";
+import React, { FC } from "react";
 import './player.scss';
 import { Card } from "../../card";
+import { Card as CardType } from "../../../constants/types";
+import { Button } from "../../interactions/button";
 
-export const Player = () => {
-    const cards = [
-        {
-            "name": "Raspberry",
-            "amount": 3,
-            "cost": 200,
-            "id": 1
-        },
-        {
-            "name": "Wheat",
-            "amount": 2,
-            "cost": 300,
-            "id": 2
-        }, {
-            "name": "Hat",
-            "amount": 1,
-            "cost": 400,
-            "id": 3
-        },
-        {
-            "name": "Milk",
-            "amount": 2,
-            "cost": 500,
-            "id": 4
-        }
-    ]
-    return <div className="player">
-        {cards.map((card) => {
-            return <Card key={card.id} card={card} onClick={() => { }} active state="game" />
-        })}
-    </div>
+interface PlayerInterface {
+    hand: Array<CardType>
+    deck: Array<CardType>
+    selectedCards: Array<CardType>
+    onClickCard: Function
+    playCards: Function
+    hasPlayedCard: boolean
 }
+
+export const Player: FC<PlayerInterface> = ({
+	hand,
+	deck,
+	selectedCards,
+	onClickCard,
+	playCards,
+	hasPlayedCard
+}) => {
+	return <div className="player">
+		{hand.map((card) => {
+			return <Card
+				key={card.id}
+				card={card}
+				onClick={() => onClickCard(card)}
+				active={!hasPlayedCard}
+				selectedCards={selectedCards}
+			/>;
+		})}
+		{selectedCards.length > 0 && (
+			<Button className="player__submit-move" onClick={playCards} text="play cards" />
+		)}
+	</div>;
+};

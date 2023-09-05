@@ -26,15 +26,15 @@ export const LobbyListContainer = () => {
 
 			socket.on('ROOM_UPDATED', (roomsRes: Object) => {
 				setRooms(roomsRes);
-			})
+			});
 
 			socket.on('JOINED_ROOM', (room: Room) => {
-				nav(`/room/${room.id}`)
-			})
+				nav(`/room/${room.id}`);
+			});
 
 			socket.on('ROOM_REMOVED', (roomsRes: Object) => {
 				setRooms(roomsRes);
-			})
+			});
 
 			return () => {
 				socket.off("GET_ROOMS_RES");
@@ -44,15 +44,15 @@ export const LobbyListContainer = () => {
 				socket.off("ROOM_REMOVED");
 			};
 		}
-	}, [socket])
+	}, [socket]);
 
 	const $onPublicRoom = () => {
 		socket.emit('CREATE_ROOM');
-	}
+	};
 
 	const $onPrivateRoom = () => {
 		nav('/lobby/create');
-	}
+	};
 
 	const $onClickRoom = (e: React.MouseEvent<HTMLAnchorElement>, room: Room) => {
 		if (room.password !== '') {
@@ -63,7 +63,7 @@ export const LobbyListContainer = () => {
 		} else if (room.users.length > 4) {
 			e.preventDefault();
 		}
-	}
+	};
 
 	return (
 		<LobbyList
@@ -73,4 +73,4 @@ export const LobbyListContainer = () => {
 			onClickRoom={$onClickRoom}
 		/>
 	);
-}
+};

@@ -1,28 +1,59 @@
 .opponent {
     background-color: #eee1b8;
+    width: 250px;
+    height: 300px;
+    max-width: 250px;
+    max-height: 300px;
+    position: absolute;
+    z-index: 0;
 
     &__card-container {
         flex-direction: row;
         padding: 20px 37px 20px 20px;
+        position: absolute;
+    }
+
+    &__is-thinking {
+        height: 100%;
+        width: 5px;
+
+        @keyframes thinking {
+            0% {
+                border-image: linear-gradient(to right, darkblue, darkorchid, round) 1;
+            }
+
+            25% {
+                border-image: linear-gradient(to top, darkblue, darkorchid) 1;
+            }
+
+            50% {
+                border-image: linear-gradient(to left, darkblue, darkorchid) 1;
+            }
+
+            75% {
+                border-image: linear-gradient(to bottom, darkblue, darkorchid) 1;
+            }
+
+            100% {
+                border-image: linear-gradient(to right, darkblue, darkorchid, round) 1;
+            }
+        }
+
+        animation: thinking .5s 1;
+
+    }
+
+    &--hide-bg {
+        background-color: transparent;
     }
 
     & .card {
         margin: 0 0 0 -45px;
     }
 
-    @for $i from 0 through 3 {
-        &-#{$i} {
-            position: absolute;
-            width: 250px;
-            height: 300px;
-            max-width: 250px;
-            max-height: 300px;
-        }
-    }
-
     &-0 {
         flex-direction: column-reverse;
-        top: 36%;
+        top: 33%;
         left: 10%;
         transform: rotate(90deg);
 
@@ -33,7 +64,7 @@
 
     &-1 {
         flex-direction: column-reverse;
-        top: 36%;
+        top: 33%;
         right: 10%;
         transform: rotate(-90deg);
 
@@ -43,7 +74,7 @@
     }
 
     &-2 {
-        top: 5%;
+        top: 2%;
         left: 10%;
         transform: rotate(-45deg);
 
@@ -56,7 +87,7 @@
     }
 
     &-3 {
-        top: 5%;
+        top: 2%;
         right: 10%;
         transform: rotate(45deg);
 

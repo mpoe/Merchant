@@ -18,4 +18,4 @@ root.render(<BrowserRouter>
 		<MerchantContainer roomData={null} />
 		<DebugContainer />
 	</SocketProvider>
-</BrowserRouter>)
+</BrowserRouter>);

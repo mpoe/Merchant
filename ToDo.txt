@@ -18,12 +18,15 @@ Implement and use these libraries:
 🗸 set up eslint file
 🗸 make app redirect if condition is not met
 🗸 classnames
-☐ Private lobby
-☐ public lobby
+🗸 Private lobby
+🗸 public lobby
 🗸 usernames from socket
-☐ Lobby pregame
-☐ draft
+🗸 Lobby pregame
+🗸 draft
 ☐ game
+☐ Add bots in lobby phase
+☐ Make bots smart
+☐ Convert node server to ts
 
 
 

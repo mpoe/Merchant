@@ -9,17 +9,17 @@ interface SocketProviderInterface {
 declare const SOCKET_URL: string;
 
 const SocketProvider: FC<SocketProviderInterface> = ({ children }) => {
-    const [Socket, setSocket] = useState(null);
-    const socket = openSocket(SOCKET_URL);
-    socket.on('connect', () => {
-        if (Socket) {
-            return null;
-        }
-        return setSocket(socket);
-    })
+	const [Socket, setSocket] = useState(null);
+	const socket = openSocket(SOCKET_URL);
+	socket.on('connect', () => {
+		if (Socket) {
+			return null;
+		}
+		return setSocket(socket);
+	});
 
-    return <SocketContext.Provider value={Socket}>{children}</SocketContext.Provider>;
-}
+	return <SocketContext.Provider value={Socket}>{children}</SocketContext.Provider>;
+};
 
 export default SocketContext;
-export { SocketProvider }
+export { SocketProvider };

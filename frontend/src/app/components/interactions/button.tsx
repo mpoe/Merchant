@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import './button.scss';
@@ -15,6 +15,12 @@ interface ButtonInterface {
 	style?: ButtonStyle;
 }
 
-export const Button: FC<ButtonInterface> = ({ onClick, text, className, style = "DEFAULT" }) => (
-	<button type="button" className={classnames(className, style)} onClick={(e) => onClick(e)}>{text}</button>
+export const Button: FC<ButtonInterface> = ({ onClick, text, className, style }) => (
+	<button
+		type="button"
+		className={classnames(className, style)}
+		onClick={(e) => onClick(e)}
+	>
+		{text}
+	</button>
 );

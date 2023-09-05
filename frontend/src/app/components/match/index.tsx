@@ -1,40 +1,68 @@
-import React, { FC } from 'react';
-import { Room } from '../../constants/types';
+import React, { FC, useState } from 'react';
+import { Card, Room } from '../../constants/types';
 
-import { Background } from '../background';
 import { Opponent } from './player/opponent';
 import { Player } from './player';
 import { Scoreboard } from './scoreboard';
 
-import matchBg from '../../../../assets/bg-game.svg';
-
 import './match.scss';
+import { Field } from '../field';
+import { PlayArea } from './playArea';
 
 interface MatchInterface {
     room?: Room;
+    playerId: String;
+    playCards: Function;
+	showdown: boolean;
 }
 
-export const Match: FC<MatchInterface> = ({ room }) => {
-    // room.players.length - 1
-    const player = {
-        id: 1,
-        username: 'test',
-        status: 'test',
-        score: 0,
-        hasPlayedCard: false,
-        deck: [] as any,
-        hand: [] as any,
-    }
+export const Match: FC<MatchInterface> = ({ room, playerId, playCards, showdown }) => {
+	const player = room.state.players.find((player) => player.id === playerId);
+	const opponents = room.state.players.filter((player) => player.id !== playerId);
+	const customer = room.state.customers[room.state.round];
+	const playedCards = room.state.playedCards;
 
-    const opponents = [player, { ...player, id: 2 }, { ...player, id: 3 }, { ...player, id: 4 }]
+	const [selectedCards, setSelectedCards] = useState([]);
 
-    return (
-        <Background src={matchBg}>
-            <div className='match__playing-field'>
-                <Scoreboard />
-                <Player />
-                {opponents.map((opponent, i) => <Opponent key={opponent.id} i={i} />)}
-            </div>
-        </Background>
-    );
-}
+	/**
+	 * @param card 
+	 */
+	const $onClickCard = (card: Card) => {
+		setSelectedCards([...selectedCards, card]);
+	};
+
+	const $playCards = () => {
+		playCards(selectedCards);
+		setSelectedCards([]);
+	};
+
+	return (
+		<Field isGame room={room} users={room.users}>
+			<div className='match__playing-field'>
+				<Scoreboard />
+				<PlayArea
+					customer={customer}
+					showdown={showdown}
+					playedCards={playedCards}
+					opponents={opponents}
+				/>
+				<Player
+					hand={player.hand}
+					deck={player.deck}
+					selectedCards={selectedCards}
+					onClickCard={$onClickCard}
+					playCards={$playCards}
+					hasPlayedCard={player.hasPlayedCard}
+				/>
+				{opponents.map((opponent, i) => (
+					<Opponent
+						hand={opponent.hand}
+						key={opponent.id}
+						i={i}
+						hasPlayedCard={opponent.hasPlayedCard}
+					/>)
+				)}
+			</div>
+		</Field>
+	);
+};

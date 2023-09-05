@@ -10,4 +10,10 @@
     left: calc(50% - 350px);
     flex-direction: row;
     justify-content: center;
+    z-index: 1;
+
+    &__submit-move {
+        position: absolute;
+        top: -1.5em;
+    }
 }

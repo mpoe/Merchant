@@ -14,33 +14,33 @@ export const RoomCreateContainer = () => {
 
 	const $onChangePassword = (e: any) => {
 		setPassword(e.target.value);
-	}
+	};
 
 	const $onCreateRoom = () => {
 		socket.emit('CREATE_ROOM', { password, name: roomName });
-	}
+	};
 
 	const $onChangeRoomName = (e: any) => {
-		setRoomName(e.target.value)
-	}
+		setRoomName(e.target.value);
+	};
 
 	const $onCancel = () => {
 		$goToBrowse();
-	}
+	};
 
 	const $goToBrowse = () => {
 		nav('/lobby/browse');
-	}
+	};
 
 	useEffect(() => {
 		if (socket) {
 
 			socket.on('JOINED_ROOM', (room: Room) => {
-				nav(`/room/${room.id}`)
-			})
+				nav(`/room/${room.id}`);
+			});
 			return () => {
 				socket.off('JOINED_ROOM');
-			}
+			};
 		}
 	}, [socket]);
 
@@ -55,4 +55,4 @@ export const RoomCreateContainer = () => {
 			handleBack={$goToBrowse}
 		/>
 	);
-}
+};

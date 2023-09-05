@@ -1,0 +1,13 @@
+.playarea {
+    background-color: #b8eeb9;
+    position: absolute;
+    width: 400px;
+    height: 255px;
+    left: calc(50% - 200px);
+    z-index: 2;
+    top: 25%;
+
+    & .opponent .card {
+        width: 70px;
+    }
+}

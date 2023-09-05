@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		// {
+		// 	"label": "SplitTerminalonStartup",
+		// 	"command": "${command:workbench.action.terminal.split}",
+		// 	"type": "shell",
+		// 	"problemMatcher": [],
+		// 	"runOptions": {
+		// 		"runOn": "folderOpen"
+		// 	}
+		// },
+		{
+			"type": "npm",
+			"script": "start:dev",
+			"path": "backend",
+			"problemMatcher": [],
+			"label": "npm: start:dev - backend",
+			"detail": "nodemon -r dotenv/config index.js dotenv_config_path=./.env.develop"
+		},
+		{
+			"type": "npm",
+			"script": "start:dev",
+			"path": "frontend",
+			"problemMatcher": [],
+			"label": "npm: start:dev - frontend",
+			"detail": "webpack-dev-server --env ENVIRONMENT=develop"
+		},
+		{
+			"label": "start-dev",
+			"dependsOn": [
+				"npm: start:dev - frontend",
+				"npm: start:dev - backend"
+			],
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}

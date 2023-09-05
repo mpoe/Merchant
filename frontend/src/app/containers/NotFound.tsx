@@ -6,4 +6,4 @@ export const NotFoundContainer = () => {
 	return (
 		<NotFound />
 	);
-}
+};
