@@ -14,8 +14,8 @@ const container = document.getElementById('app');
 const root = createRoot(container);
 root.render(<BrowserRouter>
 	<SocketProvider>
-		{/* <Router /> */}
-		<MerchantContainer roomData={null} />
-		<DebugContainer />
+		<Router />
+		{/* <MerchantContainer roomData={null} />
+		<DebugContainer /> */}
 	</SocketProvider>
 </BrowserRouter>);

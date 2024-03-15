@@ -8,14 +8,15 @@
     flex: 1;
     font-size: 2em;
     font-family: 'lovelyn';
+    width: calc(100% - 22px);
+
+    &__label {
+        font-family: 'lovelyn';
+    }
 
     &::placeholder {
         color: black;
         opacity: 1;
-    }
-
-    &__label {
-        font-family: 'lovelyn';
     }
 
     &:focus {

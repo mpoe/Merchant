@@ -25,7 +25,6 @@ export const Room: FC<RoomInterface> = ({ room, startGame, isHost, goToBrowse })
 	return (
 		<Background src={bg}>
 			<LobbyLayout>
-				<Button style={ButtonStyle.BORDER} onClick={goToBrowse} text="Leave room" className='room__back-button' />
 				<LobbyHeader title={room.name} />
 				<div className="room__info">
 					<span>{`${room.users.length} player(s) waiting`}</span>
@@ -37,10 +36,11 @@ export const Room: FC<RoomInterface> = ({ room, startGame, isHost, goToBrowse })
 					))}
 				</div>
 				{isHost && (
-					<div className="bottom-action">
-						<Button className="button--colored button--small" onClick={startGame} text="start game" />
-					</div>
+					<Button className="button--colored button--small" onClick={startGame} text="start game" />
 				)}
+				<div className="bottom-action">
+					<Button style={ButtonStyle.BORDER} onClick={goToBrowse} text="Leave room" className='room__back-button' />
+				</div>
 			</LobbyLayout>
 		</Background>
 	);

@@ -1,7 +1,7 @@
 .namepicker {
 	padding-top: 9rem;
-	padding-right: 19%;
-	padding-left: 55%;
+	padding-right: 9rem;
+	padding-left: 35rem;
 
 	&__title {
 		font-family: 'lovelyn';
@@ -10,17 +10,22 @@
 	}
 
 	&__input {
-		width: 321px;
-	}
-
-	&__input-container {
 		margin-bottom: 41px;
 		max-width: 260px;
-		width: 100%;
-		min-width: 100%;
 	}
 
 	&__submit {
 		padding: 0;
+	}
+
+	@media (max-width: 900px) {
+		padding-right: 0;
+		padding-left: 0;
+		align-items: center;
+
+		&__input-container {
+			min-width: auto;
+			width: auto;
+		}
 	}
 }

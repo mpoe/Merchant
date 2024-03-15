@@ -2,7 +2,8 @@
 	&__info {
 		display: flex;
 		justify-content: space-between;
-		width: 100%;
+		width: 90%;
+		padding-top: 10px;
 
 		&>span {
 			font-size: 1.5em;
@@ -12,7 +13,7 @@
 
 	&__container {
 		display: flex;
-		width: 100%;
+		width: 90%;
 		flex-direction: column;
 		flex: 1;
 	}
@@ -24,5 +25,8 @@
 
 	&__back-button {
 		color: goldenrod;
+		width: 66%;
+		align-self: center;
+		margin-top: 25px;
 	}
 }

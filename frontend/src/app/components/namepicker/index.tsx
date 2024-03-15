@@ -21,7 +21,6 @@ export const NamePicker: FC<NamePickerProps> = ({ handleInput, username, submit 
 				name="username"
 				onChange={(e: any) => handleInput(e)}
 				placeholder="Username"
-				containerClass="namepicker__input-container"
 				className="namepicker__input"
 				labelText=""
 			/>

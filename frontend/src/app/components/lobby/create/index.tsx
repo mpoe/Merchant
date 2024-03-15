@@ -32,7 +32,7 @@ export const RoomCreate: FC<RoomCreateInterFace> = ({
 	<Background src={bg}>
 		<LobbyLayout>
 			<LobbyHeader title="create room" />
-			<div className="room-create__container">
+			<div className="room-create">
 				<Input
 					value={roomName}
 					name="roomName"
