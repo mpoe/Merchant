@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable max-len */
 const express = require('express');
 const app = express();
 const http = require('http');
@@ -111,7 +111,7 @@ io.on('connection', (client) => { // client === socket connection
 			players,
 			activePlayer: startingPlayer,
 			playedCards: []
-		})
+		});
 	}
 
 	function startRound({ roomId, round = 0 }) {
@@ -129,12 +129,12 @@ io.on('connection', (client) => { // client === socket connection
 			}),
 			activePlayer: startingPlayer,
 			playedCards: [],
-		})
+		});
 
 		rooms[`room-${roomId}`].state.players.forEach(player => {
 			if(player.status === 'bot') {
 				const move = getMove(player.hand, customers[round]);
-				playCards({ roomId, playerId: player.id, cards: move })
+				playCards({ roomId, playerId: player.id, cards: move });
 			}
 		});
 
@@ -167,7 +167,7 @@ io.on('connection', (client) => { // client === socket connection
 				return user;
 			}),
 			activePlayer,
-		})
+		});
 
 		client.emit('CARD_DRAFTED', rooms[`room-${roomId}`]);
 		io.to(`room-${roomId}`).emit('CARD_DRAFTED', rooms[`room-${roomId}`]);
@@ -194,8 +194,8 @@ io.on('connection', (client) => { // client === socket connection
 				}
 				return player;
 			}),
-			playedCards: [...room.state.playedCards, ...cards.map((card) => ({...card, playedBy: playerId}))],
-		})
+			playedCards: [...room.state.playedCards, ...cards.map((card) => ({ ...card, playedBy: playerId }))],
+		});
 
 		const updatedRoom = rooms[`room-${roomId}`];
 		if(updatedRoom.state.players.filter((p) => p.hasPlayedCard).length === updatedRoom.state.players.length) showDown(roomId);
@@ -212,13 +212,13 @@ io.on('connection', (client) => { // client === socket connection
 				return {
 					...p,
 					hand: p.hand.filter((card) => {
-						const playedByPlayer = room.state.playedCards.filter((c2) => c2.playedBy === p.id)
+						const playedByPlayer = room.state.playedCards.filter((c2) => c2.playedBy === p.id);
 						if(playedByPlayer.find((pc) => pc.id === card.id)) return null;
 						return card;
 					})
 				};
 			})
-		})
+		});
 		client.emit('SHOWDOWN', rooms[`room-${roomId}`]);
 	}
 
