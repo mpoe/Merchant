@@ -5,7 +5,7 @@
   "description": "quick project",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "npm i && webpack --mode production",
     "build:dev": "webpack --env ENVIRONMENT=develop",
     "start:dev": "webpack-dev-server --env ENVIRONMENT=develop",
     "start": "npm run build && node dist/server.js"
