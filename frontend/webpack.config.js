@@ -11,12 +11,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {
 	// Check if the file exists, otherwise fall back to the production .env
-	const currentPath = path.join(__dirname);
+	const currentPath = path.join(__dirname, '../');
+	console.log('currentPath', currentPath);
 	const basePath = currentPath + '/.env';
+	console.log('basePath', basePath);
 	const envPath = basePath + '.' + env.ENVIRONMENT;
+	console.log('envPath', envPath);
 	const finalPath = fs.existsSync(envPath) ? envPath : basePath;
 
+	console.log('finalPath', finalPath);
+
 	const fileEnv = require('dotenv').config({ path: finalPath }).parsed;
+
+	console.log('fileEnv', fileEnv);
 	return {
 		entry: SRC_DIR + '/app',
 		output: {

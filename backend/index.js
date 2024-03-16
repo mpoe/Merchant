@@ -14,12 +14,12 @@ const { customers, cards } = data;
 
 const io = new Server(server, {
 	cors: {
-		origin: process.env.SOCKET_SOURCE, // make sure that this point to external ip when hosting site
+		origin: '*', // make sure that this point to external ip when hosting site
 		methods: ["GET", "POST"]
 	}
 });
 
-const port = process.env.PORT;
+const port = 80;
 
 // const dbcon = require('./db'); // connection to the database
 
